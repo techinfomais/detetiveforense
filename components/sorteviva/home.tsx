@@ -454,48 +454,37 @@ function Bulk({ addMany }: { addMany: (items: [number, number][]) => void }) {
 
 /* ------------------------------------------------------------------ */
 /* Ganhadores (pessoas e valores fictícios) */
-type Winner = { name: string; city: string; prize: string; video: boolean }
+// `video`: ID do depoimento no YouTube (youtube.com/watch?v=<id>). Os ganhadores com vídeo usam o nome
+// e a cidade que aparecem no próprio depoimento; os demais são fictícios.
+type Winner = { name: string; city: string; prize: string; video?: string }
 const W5 = "R$ 5.000,00 - valor líquido (cada)"
 const W10 = "R$ 10.000,00 - valor líquido (cada)"
 const WINNERS: Winner[] = [
-  { name: "Cláudio A. M.", city: "Natal/RN", prize: W5, video: true },
-  { name: "Denise P. R.", city: "São Paulo/SP", prize: W5, video: false },
-  { name: "Fábio T. L.", city: "Guarulhos/SP", prize: W5, video: true },
-  { name: "Renato L. S.", city: "Niterói/RJ", prize: W5, video: true },
-  { name: "Rui N. G.", city: "Santo André/SP", prize: W5, video: false },
-  { name: "Márcia S.", city: "Cuiabá/MT", prize: W5, video: true },
-  { name: "Gilson R. C.", city: "Campinas/SP", prize: W5, video: true },
-  { name: "Elaine A. V.", city: "Maceió/AL", prize: W5, video: true },
-  { name: "Marta G. S.", city: "Arapiraca/AL", prize: W5, video: true },
-  { name: "Valter L. O.", city: "Recife/PE", prize: W5, video: false },
-  { name: "Viviane T. S.", city: "Bauru/SP", prize: W10, video: false },
-  { name: "Antônio M. D.", city: "Londrina/PR", prize: W10, video: false },
-  { name: "Bruna C. I.", city: "Marília/SP", prize: W10, video: false },
-  { name: "Alex S. S.", city: "Diadema/SP", prize: W10, video: false },
-  { name: "Edna D. M.", city: "Belém/PA", prize: W10, video: false },
-  { name: "Janaína O.", city: "Araraquara/SP", prize: "R$ 50.000,00 - valor líquido", video: false },
-  { name: "Osmar J. P.", city: "Brasília/DF", prize: "R$ 50.000,00 - valor líquido", video: false },
-  { name: "Mirela G.", city: "Sorocaba/SP", prize: "R$ 500.000,00 - valor líquido", video: false },
-  { name: "???", city: "Joinville/SC", prize: "Avião dos Sonhos: R$ 100.000,00 - valor líquido", video: false },
+  { name: "Carlos A. P. A.", city: "São José de Mipibu/RN", prize: W5, video: "eO-kMaOQro0" },
+  { name: "Denise P. R.", city: "São Paulo/SP", prize: W5 },
+  { name: "Francisco P. F. A.", city: "Guarulhos/SP", prize: W5, video: "4CQz_pINcJk" },
+  { name: "Robson L. P.", city: "São Gonçalo/RJ", prize: W5, video: "1sl59lMIURA" },
+  { name: "Rui N. G.", city: "Santo André/SP", prize: W5 },
+  { name: "Marcos S.", city: "Caramujo/MT", prize: W5, video: "2eAsErP93JY" },
+  { name: "Gilmar R. L.", city: "São Paulo/SP", prize: W5, video: "gpgXbpK8aIc" },
+  { name: "Edineuza A. V. O.", city: "Maceió/AL", prize: W5, video: "pn2N-JK-Uj8" },
+  { name: "Maria A. G. S.", city: "Rio Largo/AL", prize: W5, video: "SKJ1THDWlQ4" },
+  { name: "Valter L. O.", city: "Recife/PE", prize: W5 },
+  { name: "Viviane T. S.", city: "Bauru/SP", prize: W10 },
+  { name: "Antônio M. D.", city: "Londrina/PR", prize: W10 },
+  { name: "Bruna C. I.", city: "Marília/SP", prize: W10 },
+  { name: "Alex S. S.", city: "Diadema/SP", prize: W10 },
+  { name: "Edna D. M.", city: "Belém/PA", prize: W10 },
+  { name: "Janaína O.", city: "Araraquara/SP", prize: "R$ 50.000,00 - valor líquido" },
+  { name: "Osmar J. P.", city: "Brasília/DF", prize: "R$ 50.000,00 - valor líquido" },
+  { name: "Mirela G.", city: "Sorocaba/SP", prize: "R$ 500.000,00 - valor líquido" },
+  { name: "???", city: "Joinville/SC", prize: "Avião dos Sonhos: R$ 100.000,00 - valor líquido" },
 ]
 
-// Silhueta neutra no lugar das fotos/vídeos dos ganhadores (sem imagens reais).
-function Silhouette() {
-  return (
-    <svg className="hm-silhouette" viewBox="0 0 128 208" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <rect width="128" height="208" fill="#bfeaf9" />
-      <circle cx="64" cy="78" r="30" fill="#2fb6e0" />
-      <path d="M8 208c0-46 25-74 56-74s56 28 56 74z" fill="#2fb6e0" />
-    </svg>
-  )
-}
-
-// Vídeos de depoimento: miniaturas com as imagens locais de public/avatars.
-const PHOTOS = ["/avatars/familia-login-avatar.jpg", "/avatars/person-login-avatar.webp"]
+// Com vídeo: miniatura do YouTube (como na referência). Sem vídeo: ícone de usuário de public/icons.
 function WinnerPhoto({ winner }: { winner: Winner }) {
-  if (!winner.video) return <Silhouette />
-  const i = WINNERS.filter((w) => w.video).indexOf(winner)
-  return <img className="hm-winner-img" src={PHOTOS[i % PHOTOS.length]} alt="" loading="lazy" />
+  const src = winner.video ? `https://img.youtube.com/vi/${winner.video}/maxresdefault.jpg` : "/icons/user.webp"
+  return <img className="hm-winner-img" src={src} alt={`Foto de ${winner.name}`} loading="lazy" draggable={false} />
 }
 
 function Winners({ now, open }: { now: number; open: (w: Winner) => void }) {
@@ -538,38 +527,43 @@ function Winners({ now, open }: { now: number; open: (w: Winner) => void }) {
         onPointerUp={onUp}
         onPointerLeave={onUp}
       >
-        {WINNERS.map((w) => (
-          <button
-            type="button"
-            key={w.name + w.city}
-            className="hm-winner"
-            aria-label={`${w.name}, ${w.city}: ${w.prize}`}
-            onClick={() => {
-              if (!drag.current.moved) open(w)
-              drag.current.moved = false
-            }}
-          >
-            <span className="hm-winner-photo">
-              <WinnerPhoto winner={w} />
-            </span>
-            <span className="hm-winner-top">
-              <span>
-                <span>{w.prize}</span>
+        {WINNERS.map((w) => {
+          // como na referência, só os cards com vídeo são clicáveis
+          const Card = w.video ? "button" : "div"
+          const action = w.video
+            ? {
+                type: "button" as const,
+                "aria-label": `Assistir ao depoimento de ${w.name}, ${w.city}: ${w.prize}`,
+                onClick: () => {
+                  if (!drag.current.moved) open(w)
+                  drag.current.moved = false
+                },
+              }
+            : {}
+          return (
+            <Card key={w.name + w.city} className="hm-winner" {...action}>
+              <span className="hm-winner-photo">
+                <WinnerPhoto winner={w} />
               </span>
-            </span>
-            {w.video && (
-              <span className="hm-winner-play">
-                <Icon name="play" h={14} fw />
+              <span className="hm-winner-top">
+                <span>
+                  <span>{w.prize}</span>
+                </span>
               </span>
-            )}
-            <span className="hm-winner-info">
-              <span>
-                <b>{w.name}</b>
-                <small>{w.city}</small>
+              {w.video && (
+                <span className="hm-winner-play">
+                  <Icon name="play" h={14} fw />
+                </span>
+              )}
+              <span className="hm-winner-info">
+                <span>
+                  <b>{w.name}</b>
+                  <small>{w.city}</small>
+                </span>
               </span>
-            </span>
-          </button>
-        ))}
+            </Card>
+          )
+        })}
       </div>
     </section>
   )
@@ -602,11 +596,19 @@ function WinnerModal({ winner, close }: { winner: Winner; close: () => void }) {
         </div>
         <div className="hm-modal-body">
           <div className="hm-modal-media">
-            <WinnerPhoto winner={winner} />
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${winner.video}?autoplay=1&rel=0`}
+              title={`Depoimento de ${winner.name}`}
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              allowFullScreen
+            />
           </div>
           <div className="hm-modal-info">
             <h2 id="hm-modal-title">{winner.name}</h2>
             <p>{winner.prize}</p>
+            <a href={`https://www.youtube.com/watch?v=${winner.video}`} target="_blank" rel="noopener noreferrer">
+              Assistir no YouTube
+            </a>
           </div>
         </div>
       </div>
