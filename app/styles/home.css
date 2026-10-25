@@ -537,14 +537,9 @@
 .hm-upsell.is-docked .hm-upsell-inner {
   min-height: 72px;
 }
-/* o carrinho flutuante legado (fixo no rodapé) não existe na referência: a barra sobe para não ficar coberta */
-body:has(.floating-cart) .hm-upsell {
-  bottom: 70px;
-}
-@media (min-width: 601px) {
-  body:has(.floating-cart) .hm-upsell {
-    bottom: 99px;
-  }
+/* como na referência: com itens no carrinho, a barra fixa dá lugar ao carrinho (a caixa verde no fluxo continua) */
+body:has(.cart-button) .hm-upsell:not(.is-docked) {
+  display: none;
 }
 .hm-upsell-sentinel {
   height: 1px;

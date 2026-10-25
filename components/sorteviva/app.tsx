@@ -31,6 +31,7 @@ import {
   Book,
   type LucideIcon,
 } from "lucide-react"
+import { CartButton } from "./cart-button"
 import { DeTodosPage } from "./de-todos"
 import { Home, draws } from "./home"
 import { HelpCenter } from "./faq"
@@ -547,19 +548,7 @@ export function SorteApp({ page }: { page: string }) {
       </main>
       <SiteFooter />
       {count > 0 && page !== "checkout" && (
-        <Link href="/checkout/" className="floating-cart">
-          <span className="cart-badge">
-            <ShoppingCart size={21} />
-            <b>{count}</b>
-          </span>
-          <div>
-            <small>SEU CARRINHO</small>
-            <strong>{money(total)}</strong>
-          </div>
-          <span>
-            Ver carrinho <ArrowRight size={16} />
-          </span>
-        </Link>
+        <CartButton count={count} total={money(total)} />
       )}
       {toast && (
         <div className="toast" role="status">

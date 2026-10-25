@@ -1,0 +1,168 @@
+/* Carrinho fixo — medidas e estados de vivasorteoficial.com.br (ver components/sorteviva/cart-button.tsx) */
+.cart-button {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  color: #fff;
+}
+.cart-button-inner {
+  display: block;
+  overflow: hidden;
+  padding: 16px 24px;
+  background: rgb(0 21 207);
+  box-shadow:
+    0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cart-button:hover .cart-button-inner {
+  background: rgb(0 18 176);
+}
+.cart-button-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  white-space: nowrap;
+}
+.cart-button-icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 40px;
+  height: 34px;
+  transform: scale(0.75);
+}
+.cart-button-icon > svg {
+  display: block;
+}
+.cart-button-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: #fff;
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+  color: #000;
+  font-size: var(--ds-text-lg);
+  line-height: var(--ds-leading-lg);
+  font-weight: 800;
+}
+.cart-button-total {
+  margin: -8px 0 0 8px;
+  font-size: var(--ds-text-xl);
+  line-height: var(--ds-leading-xl);
+  font-weight: 800;
+}
+/* "Ver carrinho" — botão verde visível só abaixo de 768px */
+.cart-button-cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+  margin: -8px 0 0 auto;
+  padding: 8px 24px;
+  border-radius: 9999px;
+  background: linear-gradient(to right bottom, rgb(82 181 47), rgb(70 154 40));
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-base);
+  font-weight: 500;
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cart-button-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right top, rgb(255 255 255 / 0), rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.2));
+  opacity: 0;
+  transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cart-button-cta:hover {
+  background: linear-gradient(to right bottom, rgb(70 154 40), rgb(57 127 33));
+}
+.cart-button-cta:hover::before {
+  opacity: 1;
+}
+@media (hover: hover) {
+  .cart-button-cta:hover {
+    transform: translateY(-4px);
+  }
+}
+.cart-button-cta:active {
+  transform: scale(0.95);
+}
+/* "Ir p/ o carrinho" e setas — só a partir de 768px */
+.cart-button-label,
+.cart-button-arrows {
+  display: none;
+}
+.cart-button-label {
+  width: 0;
+  margin: -8px 8px 0;
+  opacity: 0;
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-base);
+  font-weight: 600;
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cart-button-arrows {
+  width: 40px;
+  height: 34px;
+}
+.cart-button-arrows svg {
+  display: block;
+}
+@media (min-width: 768px) {
+  .cart-button {
+    left: auto;
+    bottom: 48px;
+  }
+  .cart-button-inner {
+    padding: 16px 12px;
+    border-radius: 12px 12px 0 12px;
+  }
+  .cart-button-row {
+    display: inline-flex;
+    vertical-align: top;
+    gap: 4px;
+  }
+  .cart-button-icon {
+    transform: none;
+  }
+  .cart-button-total {
+    margin-left: 16px;
+    font-size: var(--ds-text-2xl);
+    line-height: var(--ds-leading-2xl);
+  }
+  .cart-button-cta {
+    display: none;
+  }
+  .cart-button-label,
+  .cart-button-arrows {
+    display: block;
+  }
+  .cart-button:hover .cart-button-label,
+  .cart-button:focus-visible .cart-button-label {
+    width: 100px;
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cart-button-label,
+  .cart-button-cta,
+  .cart-button-cta::before {
+    transition: none;
+  }
+}
