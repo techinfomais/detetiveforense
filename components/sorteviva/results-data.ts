@@ -133,7 +133,7 @@ const build = (seed: string, region: Region, sellerRate: number, specs: Spec[]) 
   const r = rng(seed)
   return specs.map<Prize>((s) => ({
     title: s.title,
-    balls: s.balls ? balls(r, 28 + Math.floor(r() * 17)) : undefined,
+    balls: s.balls ? balls(r, 34 + Math.floor(r() * 10)) : undefined,
     winners: Array.from({ length: s.winners }, () => winner(r, region, sellerRate)),
   }))
 }
