@@ -80,10 +80,31 @@ button:active,
 .btn:active {
   transform: translateY(1px);
 }
+/* Mesmo container da referência (Tailwind container + padding 12px) */
 .container {
+  width: calc(100% - 24px);
   max-width: 1256px;
-  width: calc(100% - 64px);
   margin: auto;
+}
+@media (min-width: 640px) {
+  .container {
+    max-width: 616px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 744px;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1000px;
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1256px;
+  }
 }
 .topline {
   height: 30px;
@@ -1733,11 +1754,6 @@ details[open] summary svg {
 .legal-page {
   padding-bottom: 32px;
 }
-@media (max-width: 600px) {
-  .legal-page.container {
-    width: calc(100% - 24px);
-  }
-}
 .legal-title {
   margin: 16px 0;
   padding: 16px 0;
@@ -1903,6 +1919,112 @@ details[open] summary svg {
   color: #8995a8;
   padding: 5px;
 }
+/* Central de ajuda (/institucional/perguntas-frequentes) — medidas de vivasorteoficial.com.br */
+.help {
+  padding: 48px 0;
+  color: rgb(46 50 56);
+}
+.help-head {
+  max-width: 768px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+.help-head h1 {
+  font-size: 30px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+.help-head p {
+  max-width: 672px;
+  margin: 0 auto;
+  font-size: var(--ds-text-base);
+  line-height: 28px;
+}
+.help-channels {
+  max-width: 672px;
+  margin: 0 auto;
+}
+.help-channel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.help-channel + .help-channel {
+  margin-top: 48px;
+}
+.help-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: 16px;
+}
+.help-icon {
+  margin-top: 4px;
+  font-size: var(--ds-text-2xl);
+  line-height: var(--ds-leading-2xl);
+}
+.help-title {
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-base);
+  font-weight: 600;
+}
+.help-text {
+  margin-top: 8px;
+  font-size: var(--ds-text-sm);
+  line-height: 24px;
+}
+.help-text a {
+  text-decoration: underline;
+  transition: color 200ms;
+}
+.help-text a:hover {
+  color: rgb(var(--ds-success));
+}
+.help-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  background: linear-gradient(to right bottom, rgb(82 181 47), rgb(70 154 40));
+  color: #fff;
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-base);
+  font-weight: 500;
+  transition: filter 150ms ease-out;
+}
+.help-button:hover {
+  filter: brightness(1.05);
+}
+.help-channels hr {
+  margin: 48px 0 0;
+  border: 0;
+  border-top: 1px solid rgb(229 231 235);
+}
+@media (min-width: 640px) {
+  .help-channel {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+  }
+}
+@media (min-width: 768px) {
+  .help {
+    padding-bottom: 64px;
+  }
+  .help-head {
+    margin-bottom: 48px;
+  }
+  .help-head h1 {
+    font-size: 36px;
+    line-height: 40px;
+  }
+  .help-head p {
+    font-size: var(--ds-text-lg);
+  }
+}
 /* Menu mobile — gaveta lateral de vivasorteoficial.com.br */
 .menu-backdrop {
   position: fixed;
@@ -2015,9 +2137,6 @@ details[open] summary svg {
   }
 }
 @media (min-width: 1440px) {
-  .container {
-    max-width: 1256px;
-  }
   .hero {
     gap: 48px;
   }
@@ -2234,9 +2353,6 @@ details[open] summary svg {
   }
 }
 @media (max-width: 600px) {
-  .container {
-    width: calc(100% - 28px);
-  }
   .topline {
     height: 26px;
   }

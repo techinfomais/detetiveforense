@@ -40,6 +40,7 @@ import {
   Book,
   type LucideIcon,
 } from "lucide-react"
+import { HelpCenter } from "./faq"
 import { TermsOfUse } from "./terms"
 
 const money = (n: number) =>
@@ -1001,46 +1002,7 @@ export function SorteApp({ page }: { page: string }) {
             </p>
           </section>
         ) : page.includes("perguntas-frequentes") ? (
-          <section className="interior narrow container">
-            <div className="eyebrow">PODEMOS AJUDAR?</div>
-            <h1>Suas dúvidas, respondidas.</h1>
-            <p className="intro">
-              Tudo o que você precisa saber para explorar a plataforma.
-            </p>
-            {[
-              [
-                "Como faço para participar?",
-                "Escolha um sorteio na página inicial, ajuste a quantidade de títulos e clique em Quero participar. Você poderá conhecer todas as etapas em uma simulação sem cobrança.",
-              ],
-              [
-                "Como acompanho os resultados?",
-                "Acesse Resultados no menu principal e filtre a categoria desejada. Os números exibidos nesta versão são exemplos.",
-              ],
-              [
-                "Posso comprar pelo Pix?",
-                "A interface foi preparada para apresentar esse meio de pagamento. Esta versão estática não processa pagamentos nem gera códigos Pix.",
-              ],
-              [
-                "Como encontro meus títulos?",
-                "A área Minha conta reúne o acesso aos seus títulos. Nesta demonstração, nenhum título real é emitido.",
-              ],
-              [
-                "Existe uma instituição beneficiada?",
-                "A seção de impacto está pronta para receber a instituição parceira e suas informações oficiais antes do lançamento.",
-              ],
-            ].map(([q, a]) => (
-              <details key={q}>
-                <summary>
-                  {q}
-                  <Plus size={18} />
-                </summary>
-                <p>{a}</p>
-              </details>
-            ))}
-            <Link href="/contato/" className="text-link">
-              Ainda precisa de ajuda? Fale com a gente <ArrowRight size={16} />
-            </Link>
-          </section>
+          <HelpCenter />
         ) : page === "contato" || page.startsWith("seja-um-") ? (
           <section className="interior container">
             <div className="eyebrow">VAMOS CONVERSAR</div>

@@ -13,6 +13,8 @@ export const LEGAL = {
   charity: "INSTITUIÇÃO BENEFICENTE PARCEIRA",
   charityCnpj: "11.222.333/0001-44",
   phone: "0800 000 0000",
+  supportPhone: "(11) 4000-0000",
+  whatsapp: "5511900000000",
   email: "contato@exemplo.com.br",
   updatedAt: "Outubro/2026",
 }
