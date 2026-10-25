@@ -151,16 +151,7 @@ export function SorteApp({ page }: { page: string }) {
   const navigation = (
     <>
       {MENU.map((item) =>
-        item.href ? (
-          <Link
-            key={item.label}
-            className="nav-item"
-            href={item.href}
-            aria-current={current(item.href)}
-          >
-            <span>{item.label}</span>
-          </Link>
-        ) : (
+        item.children ? (
           <div key={item.label} className="nav-item nav-group" tabIndex={0}>
             <span>{item.label}</span>
             <div className="dropdown">
@@ -175,6 +166,15 @@ export function SorteApp({ page }: { page: string }) {
               ))}
             </div>
           </div>
+        ) : (
+          <Link
+            key={item.label}
+            className="nav-item"
+            href={item.href}
+            aria-current={current(item.href)}
+          >
+            <span>{item.label}</span>
+          </Link>
         )
       )}
     </>
