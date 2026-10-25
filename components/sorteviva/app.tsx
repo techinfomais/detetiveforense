@@ -1001,20 +1001,14 @@ export function SorteApp({ page }: { page: string }) {
               sorteios realizados.
             </p>
           </section>
-        ) : page.includes("perguntas-frequentes") ? (
+        ) : page === "contato" || page.includes("perguntas-frequentes") ? (
           <HelpCenter />
-        ) : page === "contato" || page.startsWith("seja-um-") ? (
+        ) : page.startsWith("seja-um-") ? (
           <section className="interior container">
             <div className="eyebrow">VAMOS CONVERSAR</div>
-            <h1>
-              {page === "contato"
-                ? "Estamos por aqui para ajudar."
-                : "Vamos crescer juntos?"}
-            </h1>
+            <h1>Vamos crescer juntos?</h1>
             <p className="intro">
-              {page === "contato"
-                ? "Envie sua mensagem. Sua experiência importa para a gente."
-                : "Faça parte dessa história e conheça as possibilidades de parceria."}
+              Faça parte dessa história e conheça as possibilidades de parceria.
             </p>
             <div className="contact-grid">
               <form
@@ -1066,9 +1060,7 @@ export function SorteApp({ page }: { page: string }) {
                       Formulário demonstrativo. Nenhum dado será enviado.
                     </small>
                     <button className="btn primary">
-                      {page === "contato"
-                        ? "Enviar mensagem"
-                        : "Tenho interesse"}
+                      Tenho interesse
                       <ArrowRight size={18} />
                     </button>
                   </>
