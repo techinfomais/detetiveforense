@@ -46,6 +46,7 @@
   color: inherit;
   font: inherit;
   text-align: left;
+  text-decoration: none;
   cursor: pointer;
   transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -71,8 +72,7 @@
 .results-text strong {
   font-weight: 700;
 }
-.results-text small,
-.results-row small {
+.results-text small {
   display: block;
   font-size: 12.8px;
   line-height: 19.2px;
@@ -86,51 +86,4 @@
 .results-chevron svg {
   display: inline-block;
   vertical-align: -0.125em;
-  transition: transform 0.15s ease;
-}
-.results-card[aria-expanded="true"] .results-chevron svg {
-  transform: rotate(90deg);
-}
-
-/* Painel com os últimos resultados (fictícios) da categoria */
-.results-panel {
-  margin-top: 8px;
-  padding: 4px 12px;
-  border: 1px solid rgb(229 231 235);
-  border-radius: 6px;
-}
-.results-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px 16px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgb(229 231 235);
-}
-.results-numbers {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.results-numbers li {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 9999px;
-  background: var(--primary);
-  color: #fff;
-  font-size: var(--ds-text-sm);
-  line-height: var(--ds-leading-sm);
-  font-weight: 700;
-}
-.results-note {
-  margin: 0;
-  padding: 12px 0 8px;
-  font-size: var(--ds-text-xs);
-  line-height: var(--ds-leading-xs);
 }

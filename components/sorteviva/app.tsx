@@ -11,12 +11,7 @@ import {
   ChevronRight,
   Gift,
   Menu,
-  Minus,
-  Plus,
-  ShieldCheck,
-  ShoppingCart,
   Ticket,
-  Trash2,
   Trophy,
   UserRound,
   X,
@@ -32,6 +27,7 @@ import {
   type LucideIcon,
 } from "lucide-react"
 import { CartButton } from "./cart-button"
+import { CheckoutPage, type Cart } from "./checkout"
 import { DeTodosPage } from "./de-todos"
 import { Home, draws } from "./home"
 import { HelpCenter } from "./faq"
@@ -44,28 +40,6 @@ import { TermsOfUse } from "./terms"
 
 const money = (n: number) =>
   n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
-type Cart = Record<string, number>
-function Quantity({ value, set }: { value: number; set: (n: number) => void }) {
-  return (
-    <div className="quantity">
-      <button
-        aria-label="Diminuir quantidade"
-        disabled={value <= 1}
-        onClick={() => set(Math.max(1, value - 1))}
-      >
-        <Minus size={17} />
-      </button>
-      <span aria-live="polite">{value}</span>
-      <button
-        aria-label="Aumentar quantidade"
-        disabled={value >= 999}
-        onClick={() => set(Math.min(999, value + 1))}
-      >
-        <Plus size={17} />
-      </button>
-    </div>
-  )
-}
 type MenuLink = { label: string; href: string; icon: LucideIcon }
 type MenuItem =
   | (MenuLink & { children?: undefined })
@@ -110,8 +84,6 @@ export function SorteApp({ page }: { page: string }) {
   const [ready, setReady] = useState(false)
   const [toast, setToast] = useState("")
   const [modal, setModal] = useState("")
-  const [step, setStep] = useState(1)
-  const [cpf, setCpf] = useState("")
   useEffect(() => {
     const timer = setTimeout(() => {
       try {
@@ -286,166 +258,10 @@ export function SorteApp({ page }: { page: string }) {
       <main id="conteudo">
         {isHome ? (
           <Home add={add} addMany={addMany} />
-        ) : page === "checkout" || page === "autenticar" ? (
-          <section className="interior container">
-            <div className="breadcrumb">
-              <Link href="/">Início</Link>
-              <ChevronRight size={13} />
-              {page === "checkout" ? "Finalizar participação" : "Minha conta"}
-            </div>
-            <div className="checkout-layout">
-              <div className="auth-box">
-                <div className="steps">
-                  <span className={step === 1 ? "current" : ""}>
-                    1. Identificação
-                  </span>
-                  <span className={step === 2 ? "current" : ""}>
-                    2. Carrinho
-                  </span>
-                  <span className={step === 3 ? "current" : ""}>
-                    3. Confirmação
-                  </span>
-                </div>
-                {step === 1 ? (
-                  <>
-                    <div className="auth-icon">
-                      <UserRound />
-                    </div>
-                    <h1>Olá, boas-vindas!</h1>
-                    <p>Identifique-se para continuar sua participação.</p>
-                    <form
-                      onSubmit={(e) => {
-                        e.preventDefault()
-                        setStep(2)
-                      }}
-                    >
-                      <label htmlFor="cpf">CPF</label>
-                      <input
-                        id="cpf"
-                        inputMode="numeric"
-                        placeholder="000.000.000-00"
-                        value={cpf}
-                        maxLength={14}
-                        onChange={(e) => {
-                          const n = e.target.value
-                            .replace(/\D/g, "")
-                            .slice(0, 11)
-                          setCpf(
-                            n
-                              .replace(/(\d{3})(\d)/, "$1.$2")
-                              .replace(/(\d{3})(\d)/, "$1.$2")
-                              .replace(/(\d{3})(\d{1,2})$/, "$1-$2")
-                          )
-                        }}
-                      />
-                      <small>
-                        Use um número fictício com 11 dígitos nesta
-                        demonstração.
-                      </small>
-                      <button
-                        className="btn gold"
-                        disabled={cpf.replace(/\D/g, "").length !== 11}
-                      >
-                        Continuar <ArrowRight size={18} />
-                      </button>
-                    </form>
-                    <div className="secure">
-                      <ShieldCheck size={14} /> Seus dados não são enviados a um
-                      servidor.
-                    </div>
-                  </>
-                ) : step === 2 ? (
-                  <>
-                    <h1>Seu carrinho</h1>
-                    <p>Revise suas chances antes de continuar.</p>
-                    {count ? (
-                      draws
-                        .filter((d) => cart[d.id])
-                        .map((d) => (
-                          <div className="cart-row" key={d.id}>
-                            <div>
-                              <b>{d.name}</b>
-                              <small>{money(d.price)} por título</small>
-                              <Quantity
-                                value={cart[d.id]}
-                                set={(n) => setCart({ ...cart, [d.id]: n })}
-                              />
-                            </div>
-                            <strong>{money(d.price * cart[d.id])}</strong>
-                            <button
-                              aria-label={`Remover ${d.name}`}
-                              onClick={() => {
-                                const next = { ...cart }
-                                delete next[d.id]
-                                setCart(next)
-                              }}
-                            >
-                              <Trash2 size={17} />
-                            </button>
-                          </div>
-                        ))
-                    ) : (
-                      <div className="empty">
-                        <ShoppingCart />
-                        <h3>Seu carrinho está esperando por você</h3>
-                        <Link href="/" className="text-link">
-                          Explore os sorteios <ArrowRight size={16} />
-                        </Link>
-                      </div>
-                    )}
-                    {count > 0 && (
-                      <>
-                        <div className="cart-total">
-                          Total <b>{money(total)}</b>
-                        </div>
-                        <div className="demo-note">
-                          Simulação: nenhum pagamento será solicitado ou
-                          processado.
-                        </div>
-                        <button
-                          className="btn buy"
-                          onClick={() => {
-                            setStep(3)
-                            setCart({})
-                          }}
-                        >
-                          Concluir demonstração <Check size={18} />
-                        </button>
-                      </>
-                    )}
-                    <button className="back-button" onClick={() => setStep(1)}>
-                      <ChevronLeft size={15} /> Voltar
-                    </button>
-                  </>
-                ) : (
-                  <div className="success-panel">
-                    <span>
-                      <Check size={40} />
-                    </span>
-                    <h1>Tudo certo por aqui!</h1>
-                    <p>
-                      Você concluiu a experiência demonstrativa. Nenhum título
-                      foi emitido e nenhuma cobrança foi realizada.
-                    </p>
-                    <Link href="/" className="btn buy">
-                      Voltar ao início <ArrowRight size={17} />
-                    </Link>
-                  </div>
-                )}
-              </div>
-              <aside className="checkout-aside">
-                <Ticket size={42} />
-                <h2>
-                  O próximo capítulo
-                  <br />
-                  pode surpreender.
-                </h2>
-                <p>Pequenas chances abrem espaço para grandes sonhos.</p>
-                <ShieldCheck />
-                <small>Experiência estática e demonstrativa</small>
-              </aside>
-            </div>
-          </section>
+        ) : page === "checkout" ? (
+          <CheckoutPage cart={cart} setCart={setCart} />
+        ) : page === "autenticar" ? (
+          <DeTodosPage label="Entrar" onIdentified={() => router.push("/usuario/perfil/")} />
         ) : page === "resultados" ? (
           <ResultsPage />
         ) : page.startsWith("resultados/") ? (
