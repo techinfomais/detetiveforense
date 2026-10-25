@@ -33,17 +33,9 @@ function Fa({ icon }: { icon: keyof typeof FA }) {
   )
 }
 
-// Silhueta genérica (o site parceiro mostra um avatar padrão no lugar da foto).
+// Sem foto do contemplado: ícone de usuário padrão de public/icons.
 function Avatar() {
-  return (
-    <svg viewBox="0 0 146 146" aria-hidden="true">
-      <rect width="146" height="146" fill="#bef2ff" />
-      <path
-        fill="#0ed4ff"
-        d="M73 22c-20 0-33 16-33 37 0 14 6 26 14 33v11c0 3-2 6-5 7l-29 9C8 123 2 132 0 146h146c-2-14-8-23-20-27l-29-9c-3-1-5-4-5-7V92c8-7 14-19 14-33 0-21-13-37-33-37z"
-      />
-    </svg>
-  )
+  return <img src="/icons/user.webp" alt="" width={146} height={146} loading="lazy" draggable={false} />
 }
 
 const plural = (n: number) => `${n} ${n === 1 ? "contemplado" : "contemplados"}`

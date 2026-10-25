@@ -488,10 +488,12 @@
   border-radius: 12px;
   background: rgb(2 79 196 / 0.04);
 }
-.rcat-avatar svg {
+.rcat-avatar img {
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
 }
 .rcat-lucky {
   margin-top: auto;
