@@ -26,9 +26,9 @@ export type Cart = Record<string, number>
 type Draw = (typeof draws)[number]
 type Stage = "identify" | "profile" | "cart" | "payment" | "done"
 
-// a mensagem leva o CPF digitado para o bot identificar o cliente no WhatsApp
-const purchaseWhatsAppUrl = (cpf: string) =>
-  `https://wa.me/${LEGAL.whatsapp}?text=${encodeURIComponent(purchaseMessage(cpf))}`
+// a mensagem leva nome, CPF e telefone para o bot identificar o cliente no WhatsApp
+const purchaseWhatsAppUrl = (customer: Customer) =>
+  `https://wa.me/${LEGAL.whatsapp}?text=${encodeURIComponent(purchaseMessage(customer))}`
 
 type Order = {
   id: string
@@ -241,7 +241,7 @@ export function CheckoutPage({
       setStage("identify")
       return
     }
-    const url = purchaseWhatsAppUrl(buyer.cpf)
+    const url = purchaseWhatsAppUrl(buyer)
     setWhatsAppUrl(url)
     setCart({})
     setStage("done")

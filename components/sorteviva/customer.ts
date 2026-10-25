@@ -222,4 +222,14 @@ export function customerForCpf(cpf: string): Customer | null {
 }
 
 /** Mensagem enviada ao WhatsApp ao concluir a compra: o bot identifica o cliente pelo CPF. */
-export const purchaseMessage = (cpf: string) => `${maskCpf(cpf)} - Fiz a compra no site e aguardo o resultado!`
+export const purchaseMessage = (customer: Customer) =>
+  [
+    "📋 *CONFIRMAÇÃO DE COMPRA — VIVASORTE*",
+    "",
+    `👤 *Nome completo:* ${customer.name}`,
+    `🪪 *CPF:* ${maskCpf(customer.cpf)}`,
+    `📱 *Telefone:* ${maskPhone(customer.phone)}`,
+    "",
+    "💬 *Mensagem:*",
+    "Fiz a compra no site e aguardo o resultado!",
+  ].join("\n")
