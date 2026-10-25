@@ -43,8 +43,11 @@
   top: 0;
   right: 0;
   transform: translate(50%, -50%);
-  width: 24px;
+  /* círculo de 24px; com 2+ dígitos (ex.: 100) vira pílula para o número não ser cortado */
+  min-width: 24px;
   height: 24px;
+  padding: 0 4px;
+  white-space: nowrap;
   display: flex;
   align-items: center;
   justify-content: center;
