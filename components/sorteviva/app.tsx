@@ -39,6 +39,7 @@ import { SiteFooter } from "./footer"
 import { PartnerPage } from "./partners"
 import { RegulationPage } from "./regulation"
 import { ResultsPage } from "./results"
+import { ResultsCategoryPage } from "./results-category"
 import { TermsOfUse } from "./terms"
 
 const money = (n: number) =>
@@ -447,6 +448,8 @@ export function SorteApp({ page }: { page: string }) {
           </section>
         ) : page === "resultados" ? (
           <ResultsPage />
+        ) : page.startsWith("resultados/") ? (
+          <ResultsCategoryPage path={page.slice("resultados/".length)} />
         ) : page === "contato" || page.includes("perguntas-frequentes") ? (
           <HelpCenter />
         ) : page.startsWith("seja-um-") ? (

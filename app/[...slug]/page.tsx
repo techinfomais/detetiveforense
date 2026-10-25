@@ -1,8 +1,17 @@
-﻿import { SorteApp } from "@/components/sorteviva/app"
+import { SorteApp } from "@/components/sorteviva/app"
 export const dynamicParams = false
 export function generateStaticParams() {
   return [
     "resultados",
+    "resultados/viva-sorte",
+    "resultados/hora-do-viva",
+    "resultados/vivasortedodia",
+    "resultados/hora-norte",
+    "resultados/hora-centro-oeste",
+    "resultados/hora-sudeste",
+    "resultados/hora-sul",
+    "resultados/hora-nordeste",
+    "resultados/vivapr",
     "autenticar",
     "checkout",
     "contato",
