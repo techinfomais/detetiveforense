@@ -1,1 +1,265 @@
-/* Página gerada a partir da referência — ver components/sorteviva/de-todos.tsx */
+/* /institucional/de-todos — tela de identificação por CPF (ver components/sorteviva/de-todos.tsx) */
+.detodos-page {
+  min-height: 100vh;
+  color: rgb(46, 50, 56);
+}
+
+/* ---------- Topo azul com logo (até 1023px) ---------- */
+.detodos-hero {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 48px;
+}
+.detodos-hero-box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 54px;
+  border-radius: 0 0 64px 64px;
+  background: var(--primary);
+}
+.detodos-hero-person {
+  display: none;
+}
+.detodos-hero-logo {
+  position: absolute;
+  bottom: 0;
+  padding: 8px 16px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
+  transform: translateY(50%);
+}
+.detodos-hero-logo img {
+  display: block;
+  width: 257px;
+  height: 32px;
+  object-fit: contain;
+  object-position: center;
+}
+.detodos-spacer {
+  display: none;
+}
+
+/* ---------- Formulário ---------- */
+.detodos-main {
+  display: flex;
+}
+.detodos-main-inner {
+  padding: 16px 0;
+}
+.detodos-form-wrap {
+  position: relative;
+  width: 100%;
+  padding: 40px 0;
+}
+.detodos-form {
+  width: 100%;
+  text-align: left;
+}
+.detodos-head {
+  margin-bottom: 48px;
+}
+.detodos-head h2 {
+  padding-bottom: 12px;
+  font-size: var(--ds-text-2xl);
+  line-height: var(--ds-leading-2xl);
+  font-weight: 700;
+}
+.detodos-head span {
+  font-size: var(--ds-text-lg);
+  line-height: var(--ds-leading-lg);
+  white-space: pre-wrap;
+}
+.detodos-field {
+  margin: 24px 0;
+}
+.detodos-input {
+  position: relative;
+  border: 2px solid rgb(229, 231, 235);
+  border-radius: 6px;
+  background: rgb(248, 250, 252);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.detodos-input:focus-within {
+  border-color: var(--primary);
+  background: #fff;
+}
+.detodos-input-control {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #fff;
+  font-size: var(--ds-text-lg);
+  line-height: var(--ds-leading-lg);
+}
+.detodos-input-control input {
+  width: 100%;
+  min-width: 0;
+  padding: 16px 24px;
+  border: 0;
+  outline: 0;
+  appearance: none;
+  background: transparent;
+  color: rgb(46, 50, 56);
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-base);
+}
+.detodos-input-control input::placeholder {
+  color: rgb(46, 50, 56);
+  opacity: 1;
+}
+.detodos-input-control input:focus::placeholder {
+  color: rgb(107, 114, 128);
+}
+.detodos-input-label {
+  position: absolute;
+  top: 0;
+  margin: 12px 0 0 16px;
+  padding: 0 12px;
+  overflow: hidden;
+  pointer-events: none;
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-base);
+  font-weight: 500;
+  transform: translateY(-48px) scale(0.75);
+  transform-origin: 0;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.detodos-hint {
+  margin-top: 12px;
+  color: rgb(148, 163, 184);
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-sm);
+}
+.detodos-actions {
+  position: sticky;
+  left: 0;
+  width: 100%;
+  margin-top: 16px;
+}
+.detodos-submit {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 24px;
+  border-radius: 8px;
+  background-image: linear-gradient(to right bottom, rgb(229, 231, 235), rgb(209, 213, 219));
+  color: rgb(16, 18, 20);
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-base);
+  font-weight: 500;
+  text-align: center;
+  transition: all 150ms ease-out !important;
+}
+.detodos-submit > span {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: auto 0;
+}
+.detodos-submit:disabled {
+  opacity: 1;
+  cursor: default;
+}
+.detodos-submit.is-ready {
+  background-image: linear-gradient(
+    to right bottom,
+    rgb(var(--ds-gold-from)),
+    rgb(var(--ds-gold-from)),
+    rgb(var(--ds-gold-to))
+  );
+}
+@media (hover: hover) {
+  .detodos-submit.is-ready:not(:disabled):hover {
+    transform: translateY(-2px);
+  }
+}
+.detodos-submit.is-ready:not(:disabled):active {
+  transform: translateY(0);
+}
+.detodos-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 9999px;
+  animation: detodos-spin 0.8s linear infinite;
+}
+@keyframes detodos-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.detodos-secure {
+  margin-top: 32px;
+  font-size: var(--ds-text-xs);
+  line-height: var(--ds-leading-xs);
+  opacity: 0.6;
+}
+
+@media (min-width: 640px) {
+  .detodos-head h2 {
+    padding-bottom: 8px;
+  }
+  .detodos-input-label {
+    font-size: var(--ds-text-lg);
+    line-height: var(--ds-leading-lg);
+  }
+}
+
+/* ---------- Desktop: formulário à esquerda, personagem à direita ---------- */
+@media (min-width: 1024px) {
+  /* Referência: .row com -12px de margem e pl-6 (48px); aqui sem estourar a viewport. */
+  .detodos-row {
+    display: flex;
+    flex-flow: row-reverse wrap;
+    padding-left: 36px;
+  }
+  .detodos-hero {
+    width: calc((100% + 12px) / 3 - 12px);
+    height: 40vmax;
+    min-height: 600px;
+    margin-bottom: auto;
+    padding-left: 12px;
+  }
+  .detodos-hero-box {
+    height: 100%;
+    padding-bottom: 0;
+    border-radius: 9999px 0 0 9999px;
+    background: linear-gradient(to right bottom, var(--primary), rgb(var(--ds-primary-800)));
+  }
+  .detodos-hero-person {
+    position: absolute;
+    top: 0;
+    left: -66px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    pointer-events: none;
+  }
+  .detodos-hero-logo {
+    display: none;
+  }
+  .detodos-spacer {
+    display: block;
+    width: calc((100% + 12px) / 12);
+  }
+  .detodos-main {
+    width: calc((100% + 12px) * 7 / 12);
+    align-items: center;
+    padding: 0 12px;
+  }
+  .detodos-main-inner.container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+}

@@ -1,1 +1,208 @@
-/* Página gerada a partir da referência — ver components/sorteviva/partners.tsx */
+/* Seja um revendedor / Seja um influenciador — medidas de vivasorteoficial.com.br
+   (ver components/sorteviva/partners.tsx) */
+.partner-bg {
+  background: var(--primary);
+  overflow: hidden;
+}
+/* Card ocupa a largura externa do container (conteúdo + 12px de cada lado) */
+.partner-card {
+  margin: 32px -12px;
+  padding: 32px;
+  border-radius: 16px;
+  background: #fff;
+  color: #000;
+}
+.partner-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+.partner-head {
+  width: 100%;
+  text-align: center;
+}
+.partner-head h1 {
+  font-size: var(--ds-text-xl);
+  line-height: var(--ds-leading-xl);
+  font-weight: 700;
+  color: #000;
+}
+.partner-head p {
+  margin: 32px 0;
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-base);
+}
+
+/* Campos */
+.partner-field {
+  width: 100%;
+  margin: 24px 0;
+}
+.partner-control {
+  display: block;
+}
+.partner-label {
+  display: block;
+  margin: 0 0 16px 24px;
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-base);
+  font-weight: 500;
+  color: #000;
+}
+.partner-required {
+  margin-left: 8px;
+}
+.partner-box {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  border: 2px solid rgb(203, 213, 225);
+  border-radius: 6px;
+  background: #fff;
+  font-size: var(--ds-text-lg);
+  line-height: var(--ds-leading-lg);
+  transition: border-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.partner-box:focus-within {
+  border-color: var(--primary);
+}
+.partner-box.is-disabled {
+  background: rgb(241, 245, 249);
+}
+.partner-form .partner-input,
+.partner-form .partner-input:focus {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 16px 24px;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  box-shadow: none;
+  background-color: transparent;
+  color: #000;
+  font-family: inherit;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-sm);
+  font-weight: 400;
+  appearance: none;
+}
+.partner-form .partner-input::placeholder {
+  color: rgb(107, 114, 128);
+  opacity: 1;
+}
+.partner-form .partner-input:disabled {
+  cursor: default;
+}
+.partner-form .partner-input-lg,
+.partner-form .partner-select {
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-base);
+}
+.partner-form .partner-select {
+  height: 56px;
+  padding-right: 40px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: calc(100% - 8px) 50%;
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+}
+.partner-eye {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  border-radius: 8px;
+  background: transparent;
+  color: #000;
+  font-size: var(--ds-text-lg);
+  line-height: var(--ds-leading-lg);
+  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.partner-eye-icon {
+  /* fa-fw (1.25em) dentro de uma caixa de 21px, como na referência */
+  width: 1.25em;
+  height: 1em;
+  margin: 0 -0.75px;
+}
+.partner-hint {
+  margin-top: 12px;
+  min-height: 52px;
+}
+.partner-hint p {
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-sm);
+}
+
+/* Rede social + Perfil: lado a lado a partir de 1024px */
+.partner-pair {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  .partner-pair {
+    flex-direction: row;
+    gap: 12px;
+  }
+  .partner-pair .partner-field {
+    flex: 1 1 0%;
+    min-width: 0;
+  }
+}
+
+/* Avisos e botão */
+.partner-notes {
+  max-width: 100%;
+  margin: 16px 0 32px;
+  font-size: var(--ds-text-xs);
+  line-height: var(--ds-leading-xs);
+}
+.partner-note {
+  display: flex;
+}
+.partner-note + .partner-note {
+  margin-top: 12px;
+}
+.partner-note-icon {
+  flex: none;
+  margin-right: 8px;
+}
+.partner-angle {
+  display: block;
+  width: 8px;
+  height: 12px;
+  margin-top: 2px;
+}
+.partner-notes a {
+  display: inline-block;
+}
+.partner-submit {
+  display: block;
+  width: 100%;
+  padding: 10px 24px;
+  border-radius: 8px;
+  background-image: linear-gradient(to right bottom, rgb(2, 79, 196), rgb(2, 67, 167));
+  color: #fff;
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-base);
+  font-weight: 500;
+  text-align: center;
+  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+@media (hover: hover) {
+  .partner-submit:hover,
+  .partner-eye:hover {
+    transform: translateY(-2px);
+  }
+}
+.partner-submit:active,
+.partner-eye:active {
+  transform: translateY(0);
+}
