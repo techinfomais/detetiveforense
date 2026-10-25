@@ -8,7 +8,6 @@ import {
   ArrowUpRight,
   CalendarDays,
   Check,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Clock3,
@@ -30,6 +29,16 @@ import {
   Mail,
   Phone,
   MapPin,
+  LogIn,
+  House,
+  MessageCircle,
+  Handshake,
+  Columns2,
+  CircleQuestionMark,
+  Gavel,
+  Section,
+  Book,
+  type LucideIcon,
 } from "lucide-react"
 import { TermsOfUse } from "./terms"
 
@@ -242,6 +251,43 @@ function SectionTitle({
   )
 }
 
+type MenuLink = { label: string; href: string; icon: LucideIcon }
+type MenuItem =
+  | (MenuLink & { children?: undefined })
+  | { label: string; href?: undefined; children: MenuLink[] }
+
+// Mesma estrutura do menu de vivasorteoficial.com.br
+const MENU: MenuItem[] = [
+  { label: "Início", href: "/", icon: House },
+  { label: "Resultados", href: "/resultados/", icon: Trophy },
+  {
+    label: "Revendedor",
+    children: [
+      { label: "Seja um revendedor", href: "/seja-um-revendedor/", icon: Handshake },
+      { label: "Seja um influenciador", href: "/seja-um-influenciador/", icon: Handshake },
+      {
+        label: "Portal do Revendedor",
+        href: "https://portal.revendavivasorte.com.br/",
+        icon: Columns2,
+      },
+    ],
+  },
+  {
+    label: "Institucional",
+    children: [
+      {
+        label: "Perguntas frequentes",
+        href: "/institucional/perguntas-frequentes/",
+        icon: CircleQuestionMark,
+      },
+      { label: "Termos de uso", href: "/institucional/termos-de-uso/", icon: Gavel },
+      { label: "Regulamento", href: "/institucional/regulamento/", icon: Section },
+      { label: "Viva Sorte de Todos", href: "/institucional/de-todos/", icon: Book },
+    ],
+  },
+  { label: "Contato", href: "/contato/", icon: MessageCircle },
+]
+
 export function SorteApp({ page }: { page: string }) {
   const router = useRouter()
   const [menu, setMenu] = useState(false)
@@ -308,40 +354,53 @@ export function SorteApp({ page }: { page: string }) {
     else setToast("Títulos adicionados ao seu carrinho!")
   }
   const isHome = page === "inicio"
+  const current = (href: string) =>
+    href.replace(/^\/|\/$/g, "") === (isHome ? "" : page) ? "page" : undefined
   const navigation = (
     <>
-      <Link className={isHome ? "active" : ""} href="/">
-        Início
-      </Link>
-      <Link
-        className={page === "resultados" ? "active" : ""}
-        href="/resultados/"
-      >
-        Resultados
-      </Link>
-      <div className="nav-group">
-        <button>
-          Seja um parceiro <ChevronDown size={13} />
-        </button>
-        <div className="dropdown">
-          <Link href="/seja-um-revendedor/">Seja um revendedor</Link>
-          <Link href="/seja-um-influenciador/">Seja um influenciador</Link>
-        </div>
-      </div>
-      <div className="nav-group">
-        <button>
-          Institucional <ChevronDown size={13} />
-        </button>
-        <div className="dropdown">
-          <Link href="/institucional/perguntas-frequentes/">
-            Perguntas frequentes
+      {MENU.map((item) =>
+        item.href ? (
+          <Link
+            key={item.label}
+            className="nav-item"
+            href={item.href}
+            aria-current={current(item.href)}
+          >
+            <span>{item.label}</span>
           </Link>
-          <Link href="/institucional/regulamento/">Regulamento</Link>
-          <Link href="/institucional/jogo-responsavel/">Jogo responsável</Link>
-        </div>
-      </div>
-      <Link href="/contato/">Contato</Link>
+        ) : (
+          <div key={item.label} className="nav-item nav-group" tabIndex={0}>
+            <span>{item.label}</span>
+            <div className="dropdown">
+              {item.children.map((child) => (
+                <Link
+                  key={child.label}
+                  href={child.href}
+                  aria-current={current(child.href)}
+                >
+                  {child.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )
+      )}
     </>
+  )
+  const menuCard = ({ label, href, icon: Icon }: MenuLink) => (
+    <Link
+      key={label}
+      href={href}
+      className="menu-card"
+      aria-current={current(href)}
+      onClick={() => setMenu(false)}
+    >
+      <span className="menu-card-icon">
+        <Icon size={18} />
+      </span>
+      <span className="menu-card-label">{label}</span>
+      <ChevronRight size={12} className="menu-card-arrow" />
+    </Link>
   )
   return (
     <>
@@ -367,37 +426,35 @@ export function SorteApp({ page }: { page: string }) {
         </Link>
         <button
           className="mobile-toggle"
-          aria-label="Abrir menu"
-          onClick={() => setMenu(true)}
+          aria-label={menu ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={menu}
+          onClick={() => setMenu(!menu)}
         >
-          <Menu />
+          {menu ? <ChevronLeft /> : <Menu />}
         </button>
       </header>
       {menu && (
-        <div className="drawer-backdrop" onClick={() => setMenu(false)}>
-          <div
-            className="drawer"
+        <div className="menu-backdrop" onClick={() => setMenu(false)}>
+          <nav
+            className="menu-panel"
             role="dialog"
             aria-modal="true"
             aria-label="Menu de navegação"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              className="close"
-              autoFocus
-              onClick={() => setMenu(false)}
-              aria-label="Fechar menu"
-            >
-              <X />
-            </button>
-            <h2>Explore as possibilidades</h2>
-            <nav>
-              {navigation}
-              <Link href="/autenticar/">
-                Entre ou cadastre-se <UserRound size={18} />
-              </Link>
-            </nav>
-          </div>
+            <div className="menu-group">
+              {menuCard({ label: "Entrar", href: "/autenticar/", icon: LogIn })}
+              {MENU.flatMap((item) => (item.href ? [menuCard(item)] : []))}
+            </div>
+            {MENU.map((item) =>
+              item.children ? (
+                <div key={item.label} className="menu-group">
+                  <h3>{item.label}</h3>
+                  {item.children.map(menuCard)}
+                </div>
+              ) : null
+            )}
+          </nav>
         </div>
       )}
       <main id="conteudo">
@@ -1106,6 +1163,7 @@ export function SorteApp({ page }: { page: string }) {
                   "institucional/termos-de-uso": "Termos de uso",
                   "institucional/regulamento": "Regulamento",
                   "institucional/jogo-responsavel": "Jogo responsável",
+                  "institucional/de-todos": "Viva Sorte de Todos",
                   "politica-de-privacidade": "Política de privacidade",
                   assinaturas: "Sua sorte, todo mês",
                   "clube-beneficios": "Clube de benefícios",

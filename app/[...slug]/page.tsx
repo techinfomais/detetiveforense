@@ -16,6 +16,7 @@ export function generateStaticParams() {
     "institucional/termos-de-uso",
     "institucional/regulamento",
     "institucional/jogo-responsavel",
+    "institucional/de-todos",
     "politica-de-privacidade",
   ].map((path) => ({ slug: path.split("/") }))
 }

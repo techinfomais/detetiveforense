@@ -125,71 +125,70 @@ button:active,
   line-height: var(--ds-leading-xs);
   font-weight: 400;
 }
+/* Menu — medidas de vivasorteoficial.com.br (desktop ≥1024px) */
 .header nav {
+  flex: 1;
   display: flex;
-  gap: 29px;
-  align-items: center;
-  height: 100%;
-  color: #526079;
+  justify-content: center;
+  gap: 0 32px;
+  padding: 0 32px 0 16px;
+  color: var(--primary);
   font-size: var(--ds-text-base);
   line-height: var(--ds-leading-base);
   font-weight: 500;
 }
-.header nav > a {
-  height: 100%;
-  display: flex;
-  align-items: center;
+.nav-item {
   position: relative;
-}
-.header nav > a.active {
-  color: var(--primary);
-  font-weight: 500;
-}
-.header nav > a.active:after {
-  content: "";
-  height: 3px;
-  position: absolute;
-  bottom: 20px;
-  left: 0;
-  right: 0;
-  background: var(--primary);
-  border-radius: 3px;
-}
-.nav-group {
-  position: relative;
-}
-.nav-group > button {
-  background: none;
   display: flex;
-  gap: 6px;
-  align-items: center;
-  color: inherit;
-  padding: 18px 0;
+  padding: 16px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+a.nav-item {
+  border: 1px solid transparent;
+}
+.nav-item > span {
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+.nav-item:hover > span,
+.nav-item:focus-visible > span {
+  border-bottom-color: currentColor;
 }
 .dropdown {
   display: none;
   position: absolute;
   top: 100%;
-  left: -16px;
-  width: 220px;
-  padding: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  padding: 8px;
   background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  box-shadow: 0 12px 32px #183b6817;
-  z-index: 41;
+  border-radius: 8px;
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  text-align: center;
+  cursor: default;
+  z-index: 50;
+}
+.nav-group:hover .dropdown,
+.nav-group:focus-within .dropdown {
+  display: grid;
 }
 .dropdown a {
-  display: block;
-  padding: 10px;
-  border-radius: 6px;
-}
-.nav-group:focus-within .dropdown,
-.nav-group:hover .dropdown {
-  display: block;
+  display: flex;
+  justify-content: center;
+  padding: 16px 12px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-sm);
+  font-weight: 400;
 }
 .dropdown a:hover {
-  background: #f0f5ff;
+  background: rgb(0 0 0 / 0.05);
 }
 .login {
   display: flex;
@@ -1862,8 +1861,7 @@ details[open] summary svg {
   background: none;
   color: #8793a4;
 }
-.modal-backdrop,
-.drawer-backdrop {
+.modal-backdrop {
   position: fixed;
   inset: 0;
   background: #0c244b70;
@@ -1905,46 +1903,86 @@ details[open] summary svg {
   color: #8995a8;
   padding: 5px;
 }
-.drawer {
+/* Menu mobile — gaveta lateral de vivasorteoficial.com.br */
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgb(0 0 0 / 0.5);
+}
+.mobile-toggle[aria-expanded="true"] {
+  position: relative;
+  z-index: 101;
+}
+.menu-panel {
   position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: white;
-  width: min(370px, 100%);
-  padding: 70px 30px;
-  overflow: auto;
-}
-.drawer h2 {
-  margin-bottom: 25px;
-  font-size: var(--ds-text-2xl);
-  line-height: var(--ds-leading-2xl);
-  font-weight: 700;
-}
-.drawer nav {
+  inset: 0 auto 0 0;
+  width: 328px;
+  max-width: calc(100% - 62px);
   display: flex;
   flex-direction: column;
   gap: 12px;
-  color: var(--primary);
+  overflow-y: auto;
+  background: var(--primary);
 }
-.drawer nav > a {
-  padding: 12px 0;
-  border-bottom: 1px solid var(--line);
+.menu-panel::-webkit-scrollbar {
+  width: 10px;
+}
+.menu-panel::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgb(255 255 255 / 0.6);
+}
+.menu-group {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
 }
-.drawer .nav-group > button {
-  padding: 10px 0;
-}
-.drawer .dropdown {
-  display: block;
-  position: static;
-  box-shadow: none;
-  border: 0;
-  padding: 0 0 0 10px;
-  font-size: var(--ds-text-base);
-  line-height: var(--ds-leading-base);
+.menu-group h3 {
+  color: #fff;
+  font-size: var(--ds-text-xl);
+  line-height: 25px;
   font-weight: 500;
+}
+.menu-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 16px;
+  background: #fff;
+  text-align: left;
+}
+.menu-card-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--primary);
+  color: #fff;
+}
+.menu-card-label {
+  flex: 1;
+  min-width: 0;
+  color: rgb(86 86 86);
+  font-size: var(--ds-text-xs);
+  line-height: 15px;
+  font-weight: 500;
+}
+.menu-card-arrow {
+  color: rgb(123 123 123);
+}
+@media (max-width: 1023px) {
+  .header nav,
+  .header > .login {
+    display: none;
+  }
+  .mobile-toggle {
+    display: block;
+  }
 }
 .skip-link {
   position: fixed;
@@ -1996,9 +2034,6 @@ details[open] summary svg {
 @media (max-width: 1100px) {
   .header {
     gap: 20px;
-  }
-  .header nav {
-    gap: 19px;
   }
   .home-shortcut span {
     display: none;
