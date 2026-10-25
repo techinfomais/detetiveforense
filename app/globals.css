@@ -1,5 +1,9 @@
 ﻿@import "tailwindcss";
 @import "./design-tokens.css";
+@import "./styles/results.css";
+@import "./styles/partners.css";
+@import "./styles/regulation.css";
+@import "./styles/de-todos.css";
 /* Aliases legados → tokens do DESIGNSYSTEM.md (§2.2) */
 :root {
   --primary: rgb(var(--ds-primary));

@@ -26,9 +26,6 @@ import {
   UserRound,
   X,
   Zap,
-  Mail,
-  Phone,
-  MapPin,
   LogIn,
   House,
   MessageCircle,
@@ -40,7 +37,11 @@ import {
   Book,
   type LucideIcon,
 } from "lucide-react"
+import { DeTodosPage } from "./de-todos"
 import { HelpCenter } from "./faq"
+import { PartnerPage } from "./partners"
+import { RegulationPage } from "./regulation"
+import { ResultsPage } from "./results"
 import { TermsOfUse } from "./terms"
 
 const money = (n: number) =>
@@ -296,10 +297,8 @@ export function SorteApp({ page }: { page: string }) {
   const [ready, setReady] = useState(false)
   const [toast, setToast] = useState("")
   const [modal, setModal] = useState("")
-  const [category, setCategory] = useState("Todos")
   const [step, setStep] = useState(1)
   const [cpf, setCpf] = useState("")
-  const [sent, setSent] = useState(false)
   useEffect(() => {
     const timer = setTimeout(() => {
       try {
@@ -934,160 +933,17 @@ export function SorteApp({ page }: { page: string }) {
             </div>
           </section>
         ) : page === "resultados" ? (
-          <section className="interior container">
-            <div className="eyebrow">CADA RESULTADO, UMA NOVA HISTÓRIA</div>
-            <h1>Resultados dos sorteios</h1>
-            <p className="intro">
-              Confira os números e as premiações das últimas edições.
-            </p>
-            <div className="filters">
-              {["Todos", "Especial de domingo", "Sorteios diários"].map((c) => (
-                <button
-                  className={category === c ? "selected" : ""}
-                  key={c}
-                  onClick={() => setCategory(c)}
-                >
-                  {c}
-                </button>
-              ))}
-            </div>
-            <div className="result-list">
-              {draws
-                .filter(
-                  (d) =>
-                    category === "Todos" ||
-                    (category === "Especial de domingo"
-                      ? d.id === 1
-                      : d.id !== 1)
-                )
-                .map((d) => (
-                  <article className="result-card" key={d.id}>
-                    <div className={`result-icon ${d.tone}`}>
-                      <Trophy />
-                    </div>
-                    <div>
-                      <small>EDIÇÃO {d.edition} · 18 OUT 2026</small>
-                      <h2>{d.name}</h2>
-                      <p>
-                        Premiação ilustrativa de {money(Number(d.prize) * 1000)}
-                      </p>
-                    </div>
-                    <div className="result-numbers">
-                      {[
-                        4 + d.id,
-                        12 + d.id,
-                        23 + d.id,
-                        35 + d.id,
-                        48 + d.id,
-                      ].map((n) => (
-                        <span key={n}>{String(n).padStart(2, "0")}</span>
-                      ))}
-                    </div>
-                    <button
-                      className="text-link"
-                      onClick={() =>
-                        setModal(
-                          `Edição ${d.edition} · ${d.name}. Números e premiações fictícios, apresentados apenas como exemplo da tela de resultados.`
-                        )
-                      }
-                    >
-                      Detalhes <ArrowUpRight size={16} />
-                    </button>
-                  </article>
-                ))}
-            </div>
-            <p className="demo-note">
-              Todos os resultados apresentados são fictícios e não representam
-              sorteios realizados.
-            </p>
-          </section>
+          <ResultsPage />
         ) : page === "contato" || page.includes("perguntas-frequentes") ? (
           <HelpCenter />
         ) : page.startsWith("seja-um-") ? (
-          <section className="interior container">
-            <div className="eyebrow">VAMOS CONVERSAR</div>
-            <h1>Vamos crescer juntos?</h1>
-            <p className="intro">
-              Faça parte dessa história e conheça as possibilidades de parceria.
-            </p>
-            <div className="contact-grid">
-              <form
-                className="contact-form"
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  setSent(true)
-                }}
-              >
-                {sent ? (
-                  <div className="success-panel">
-                    <Check size={40} />
-                    <h2>Mensagem demonstrativa concluída!</h2>
-                    <p>
-                      Nenhum dado foi enviado. Em produção, este formulário será
-                      conectado ao atendimento.
-                    </p>
-                    <button
-                      type="button"
-                      className="text-link"
-                      onClick={() => setSent(false)}
-                    >
-                      Escrever outra mensagem
-                    </button>
-                  </div>
-                ) : (
-                  <>
-                    <label htmlFor="name">Seu nome</label>
-                    <input
-                      id="name"
-                      required
-                      placeholder="Como podemos chamar você?"
-                    />
-                    <label htmlFor="email">E-mail</label>
-                    <input
-                      id="email"
-                      required
-                      type="email"
-                      placeholder="voce@exemplo.com"
-                    />
-                    <label htmlFor="message">Mensagem</label>
-                    <textarea
-                      id="message"
-                      required
-                      rows={5}
-                      placeholder="Conte como podemos ajudar"
-                    />
-                    <small>
-                      Formulário demonstrativo. Nenhum dado será enviado.
-                    </small>
-                    <button className="btn primary">
-                      Tenho interesse
-                      <ArrowRight size={18} />
-                    </button>
-                  </>
-                )}
-              </form>
-              <aside className="contact-aside">
-                <Mail />
-                <h3>Seu contato faz a diferença</h3>
-                <p>
-                  Os canais oficiais de atendimento serão disponibilizados no
-                  lançamento.
-                </p>
-                <p>
-                  <Phone size={17} /> Atendimento em dias úteis
-                </p>
-                <p>
-                  <MapPin size={17} /> Plataforma brasileira
-                </p>
-                <Link
-                  href="/institucional/perguntas-frequentes/"
-                  className="text-link"
-                >
-                  Acesse as perguntas frequentes <ArrowUpRight size={16} />
-                </Link>
-              </aside>
-            </div>
-          </section>
+          <PartnerPage
+            kind={page === "seja-um-influenciador" ? "influenciador" : "revendedor"}
+          />
+        ) : page === "institucional/regulamento" ? (
+          <RegulationPage />
+        ) : page === "institucional/de-todos" ? (
+          <DeTodosPage />
         ) : page === "institucional/termos-de-uso" ? (
           <TermsOfUse />
         ) : page.startsWith("usuario/") ? (
