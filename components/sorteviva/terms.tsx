@@ -8,12 +8,17 @@ export const LEGAL = {
   companyAddress:
     "Rua das Palmeiras, 100, sala 1, Centro, na cidade de São Paulo, Estado de São Paulo, CEP 01000-000",
   issuer: "CAPITALIZADORA EXEMPLO S/A",
+  issuerShort: "Exemplo Capitalização",
   issuerCnpj: "98.765.432/0001-10",
   issuerAddress: "Av. Exemplo, 200, conjunto 10, Centro, CEP 20000-000, Rio de Janeiro/RJ",
   charity: "INSTITUIÇÃO BENEFICENTE PARCEIRA",
   charityCnpj: "11.222.333/0001-44",
   phone: "0800 000 0000",
   supportPhone: "(11) 4000-0000",
+  sacPhone: "(11) 4000-0001",
+  ombudsmanPhone: "0800 000 0001",
+  // Perfis oficiais: preencher com as URLs reais (vazio = ícone sem link)
+  social: { instagram: "", facebook: "", x: "", youtube: "" },
   whatsapp: "5511900000000",
   email: "contato@exemplo.com.br",
   updatedAt: "Outubro/2026",

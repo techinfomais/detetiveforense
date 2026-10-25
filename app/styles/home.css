@@ -1,0 +1,1148 @@
+/* Página INÍCIO — réplica de vivasorteoficial.com.br (medidas em .playwright-mcp/ref/inicio).
+ * Mobile-first; desktop a partir de 1024px (lg da referência), grade de 2 colunas a partir de 768px. */
+.hm {
+  --hm-blue: rgb(0, 21, 207);
+  --hm-success: rgb(82, 181, 47);
+  --hm-text: rgb(46, 50, 56);
+  margin-bottom: 32px;
+  color: var(--hm-text);
+  font-size: 16px;
+  line-height: 24px;
+}
+.hm h2,
+.hm h3,
+.hm h4,
+.hm h5,
+.hm p {
+  margin: 0;
+}
+.hm-icon {
+  display: inline-block;
+  flex-shrink: 0;
+}
+.hm-only-lg {
+  display: none !important;
+}
+
+/* ---------- contagem regressiva ---------- */
+.hm-top {
+  padding-top: 0;
+}
+.hm-countdown {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0;
+  padding: 0 12px;
+}
+.hm-countdown-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  max-width: 1280px;
+  margin-bottom: 5px;
+  padding: 8px 6px;
+  border-radius: 8px;
+  background: var(--primary);
+  box-shadow: rgb(2, 67, 167) 0 5px 0 0;
+  overflow: hidden;
+  color: #fff;
+}
+.hm-countdown-label {
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+.hm-countdown-label span {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.7px;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.hm-countdown-digits,
+.hm-countdown-group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.hm-countdown-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 26px;
+  padding: 0 4px;
+  border: 1px solid #000;
+  border-radius: 6px;
+  background: #fff;
+}
+.hm-countdown-box span {
+  color: var(--primary);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 24px;
+  font-variant-numeric: tabular-nums;
+}
+.hm-countdown-sep {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+/* ---------- letreiro ---------- */
+.hm-marquee {
+  width: 100%;
+  overflow: hidden;
+  background: rgb(254, 104, 0);
+  color: rgb(255, 251, 0);
+}
+.hm-marquee-track {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: hm-marquee 62.5s linear infinite;
+}
+.hm-marquee-track span {
+  margin-right: 24px;
+}
+@keyframes hm-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- destaque (sorteio principal) ---------- */
+.hm-hero-wrap {
+  padding-bottom: 12px;
+}
+.hm-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 12px;
+}
+.hm-hero-banner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 24px;
+  transform: translateZ(0);
+}
+.hm-hero-banner img,
+.hm-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hm-susep {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 16px;
+  border-radius: 16px 16px 0 0;
+  background: var(--hm-blue);
+  color: #fff;
+  font-size: 12px;
+  line-height: 18px;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+.hm-hero-panel {
+  width: 100%;
+  margin-top: -16px;
+  padding: 32px 12px 16px;
+  border-radius: 8px;
+  background: #fff;
+}
+.hm-hero-head {
+  display: flex;
+  align-items: center;
+}
+.hm-hero-title {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+.hm-hero-title h4 {
+  color: var(--primary);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+.hm-hero-title small {
+  margin-top: -4px;
+  color: rgba(0, 0, 0, 0.75);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 16px;
+}
+.hm-hero-when {
+  flex: none;
+  padding-left: 12px;
+  color: rgba(0, 0, 0, 0.75);
+  font-size: 16px;
+  line-height: 24px;
+  text-align: right;
+  white-space: nowrap;
+}
+.hm-hero-prizes {
+  display: none;
+}
+.hm-hero-buy {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+/* bloco de pagamento: TOTAL + seletor (desktop) / só seletor (mobile) */
+.hm-pay {
+  display: flex;
+  align-items: center;
+  min-height: 3.7rem;
+  overflow: hidden;
+  border-radius: 8px;
+  color: #fff;
+  user-select: none;
+}
+.hm-pay-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+}
+.hm-pay-total {
+  display: none;
+}
+.hm-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #000;
+}
+.hm-step {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #fff;
+  border-radius: 9999px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 24px;
+  line-height: 32px;
+  transition: opacity 0.15s;
+}
+.hm-step:disabled {
+  opacity: 1;
+}
+.hm-qty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.5rem;
+  height: 100%;
+  color: #000;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+}
+.hm-qty-input {
+  display: flex;
+  width: 80px;
+  min-width: 0;
+  height: 43px;
+  margin: 0 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--hm-text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 28px;
+  text-align: center;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.hm-qty-input::-webkit-outer-spin-button,
+.hm-qty-input::-webkit-inner-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+.hm-hero-buy .hm-pay {
+  padding: 4px 0;
+}
+.hm-hero-buy .hm-step {
+  width: 37px;
+  height: 37px;
+}
+
+/* botões verdes */
+.hm-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  background-image: linear-gradient(to right bottom, rgb(82, 181, 47), rgb(70, 154, 40));
+  color: #fff;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.15s ease-out;
+}
+.hm-btn > .hm-icon {
+  margin-right: 12px;
+}
+.hm-hero-cta {
+  height: 44px;
+  padding: 10px 24px;
+  font-size: 16px;
+  line-height: 24px;
+}
+@media (hover: hover) {
+  .hm-btn:hover,
+  .hm-bulk-btn:hover,
+  .hm-upsell-action button:hover {
+    transform: translateY(-4px);
+  }
+  .hm-btn:hover {
+    background-image: linear-gradient(to right bottom, rgb(70, 154, 40), rgb(57, 127, 33));
+  }
+}
+.hm-btn:active,
+.hm-bulk-btn:active {
+  transform: none;
+}
+
+/* aviso legal sob o destaque */
+.hm-disclaimer {
+  padding-top: 8px;
+  font-size: 12px;
+  line-height: 16px;
+}
+.hm-disclaimer p {
+  color: rgb(158, 158, 158);
+  text-align: center;
+}
+
+/* ---------- grade de sorteios ---------- */
+.hm-draws {
+  padding: 32px 0 16px;
+}
+.hm-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
+  margin-bottom: 16px;
+}
+.hm-cat {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 12px;
+}
+.hm-cat + .hm-card ~ .hm-cat,
+.hm-card + .hm-cat {
+  margin: 12px 0;
+}
+.hm-cat img {
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: #fff;
+}
+.hm-cat h2 {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 28px;
+}
+.hm-cat-hora h2 {
+  color: rgb(0, 95, 226);
+}
+.hm-cat-dia h2 {
+  color: rgb(245, 166, 35);
+}
+.hm-cat h2 span {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  opacity: 0.6;
+}
+
+.hm-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 24px;
+  background: #fff;
+}
+.hm-card-media {
+  position: relative;
+  min-width: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+.hm-card-media img {
+  border-radius: 24px;
+}
+.hm-card-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  background: var(--hm-blue);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  white-space: nowrap;
+}
+.hm-card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 0;
+}
+.hm-card-meta {
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.hm-card-meta > div {
+  width: 50%;
+  font-weight: 500;
+}
+.hm-card-meta-icon {
+  margin-right: 4px;
+}
+.hm-card-meta small {
+  margin-left: auto;
+  color: var(--hm-success);
+  font-size: 11.2px;
+  font-weight: 700;
+  line-height: 20px;
+}
+.hm-card-buy {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.hm-card-cta {
+  min-height: 59px;
+  padding: 10px 4px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* barra "mais chances" (fixa no rodapé da tela até encostar na caixa verde) */
+.hm-upsell {
+  position: sticky;
+  bottom: 0;
+  z-index: 50;
+  margin-top: 32px;
+}
+.hm-upsell-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 24px 0;
+  border-radius: 24px 24px 0 0;
+  background: var(--hm-success);
+  color: #fff;
+}
+.hm-upsell-text {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 66.666667%;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.7px;
+  transition: width 0.15s;
+}
+.hm-upsell-text > span:first-child {
+  display: flex;
+  font-size: 16px;
+}
+.hm-upsell-action {
+  width: 33.333333%;
+}
+.hm-upsell-action button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 36px;
+  margin: 12px 0;
+  padding: 8px 12px;
+  border: 2px solid var(--hm-success);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--hm-success);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  transition: all 0.15s ease-out;
+}
+.hm-upsell-action .hm-icon {
+  margin-left: 12px;
+}
+.hm-upsell.is-docked .hm-upsell-text {
+  width: 100%;
+}
+.hm-upsell.is-docked .hm-upsell-action {
+  display: none;
+}
+.hm-upsell.is-docked .hm-upsell-inner {
+  min-height: 72px;
+}
+/* o carrinho flutuante legado (fixo no rodapé) não existe na referência: a barra sobe para não ficar coberta */
+body:has(.floating-cart) .hm-upsell {
+  bottom: 70px;
+}
+@media (min-width: 601px) {
+  body:has(.floating-cart) .hm-upsell {
+    bottom: 99px;
+  }
+}
+.hm-upsell-sentinel {
+  height: 1px;
+  margin-top: -1px;
+}
+.hm-bulk {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 0;
+  border-radius: 0 0 24px 24px;
+  background: var(--hm-success);
+  color: #fff;
+}
+.hm-bulk-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px 12px;
+}
+.hm-bulk-text {
+  display: none;
+}
+.hm-bulk-action {
+  width: 100%;
+  padding-top: 8px;
+}
+.hm-bulk-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  padding: 10px 24px;
+  border: 2px solid #fff;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  transition: all 0.15s ease-out;
+}
+.hm-bulk-btn .hm-icon {
+  margin-right: 12px;
+}
+
+/* ---------- ganhadores ---------- */
+.hm-winners.container {
+  margin-top: 16px;
+}
+.hm-winners-head {
+  margin-bottom: 12px;
+}
+.hm-winners-head h2 {
+  color: #000;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 28px;
+}
+.hm-winners-head p {
+  color: #000;
+  font-size: 14px;
+  line-height: 20px;
+  opacity: 0.6;
+}
+.hm-winners-head strong {
+  color: var(--primary);
+}
+.hm-winners-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  user-select: none;
+}
+.hm-winners-track::-webkit-scrollbar {
+  display: none;
+}
+.hm-winner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 128px;
+  height: 208px;
+  margin: 16px 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #bfeaf9;
+  color: #fff;
+  text-align: left;
+}
+.hm-winner:active {
+  transform: none;
+}
+.hm-winner-photo {
+  position: absolute;
+  inset: 0;
+}
+.hm-silhouette {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s;
+}
+@media (hover: hover) {
+  .hm-winner:hover .hm-silhouette {
+    transform: scale(1.05);
+  }
+}
+.hm-winner-top {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  padding: 12px;
+}
+.hm-winner-top > span {
+  display: block;
+  max-width: 100%;
+  padding: 4px 12px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.45);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15px;
+  text-transform: uppercase;
+}
+.hm-winner-top > span > span {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.hm-winner-play {
+  position: absolute;
+  top: 84px;
+  left: 44px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding-left: 4px;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.4);
+}
+.hm-winner-info {
+  position: relative;
+  z-index: 10;
+  margin-top: auto;
+  padding: 60px 12px 12px;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
+  line-height: 16px;
+}
+.hm-winner-info > span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hm-winner-info b,
+.hm-winner-info small {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hm-winner-info b {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+}
+.hm-winner-info small {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  opacity: 0.7;
+}
+
+/* modal do ganhador */
+.hm-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px 12px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.5);
+}
+.hm-modal {
+  width: 100%;
+  max-width: 683px;
+  border-radius: 8px;
+  background: #fff;
+}
+.hm-modal-head {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  padding: 0 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.hm-modal-head button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: none;
+  color: var(--primary);
+}
+.hm-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+}
+.hm-modal-media {
+  height: min(60vh, 675px);
+  overflow: hidden;
+  border-radius: 8px;
+}
+.hm-modal-info {
+  padding: 20px 24px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+}
+.hm-modal-info h2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+.hm-modal-info p {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* ---------- instituição beneficiada ---------- */
+.hm-charity-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 720px;
+  margin: 0 auto;
+  padding-top: 32px;
+}
+.hm-charity-inner h2 {
+  color: var(--hm-text);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  text-align: center;
+}
+.hm-charity-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hm-charity-body img {
+  width: auto;
+  height: 96px;
+  margin: 24px auto 0;
+}
+.hm-charity-body h5 {
+  margin-top: 32px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+}
+.hm-charity-text {
+  max-width: 45rem;
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  opacity: 0.8;
+}
+.hm-charity-text p {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 639px) {
+  .hm-winners-track {
+    width: calc(100% + 24px);
+    margin-left: -12px;
+    padding: 12px;
+  }
+}
+
+/* ---------- ≥ 768px: grade em 2 colunas ---------- */
+@media (min-width: 768px) {
+  .hm-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- ≥ 1024px: layout desktop ---------- */
+@media (min-width: 1024px) {
+  .hm-only-lg {
+    display: flex !important;
+  }
+  .hm-only-sm {
+    display: none !important;
+  }
+  .hm-countdown {
+    margin: 16px 0 8px;
+  }
+  .hm-countdown-bar {
+    gap: 32px;
+    padding: 6px 12px;
+    border-radius: 12px;
+  }
+  .hm-countdown-label {
+    flex-shrink: 0;
+    overflow: visible;
+  }
+  .hm-countdown-label span {
+    overflow: visible;
+    white-space: normal;
+  }
+  .hm-countdown-digits,
+  .hm-countdown-group {
+    gap: 8px;
+  }
+  .hm-countdown-box {
+    min-width: 44px;
+    height: 30px;
+    padding: 0 8px;
+    border-radius: 8px;
+  }
+  .hm-countdown-box span {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .hm-countdown-sep {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .hm-hero-wrap {
+    padding-bottom: 0;
+  }
+  .hm-hero.container {
+    flex-direction: row;
+    margin: 32px auto;
+    padding-top: 0;
+  }
+  .hm-hero-banner {
+    flex: 0 0 66.6667%;
+  }
+  .hm-hero-panel {
+    flex: 1;
+    min-width: 0;
+    margin-top: 0;
+    padding: 24px;
+    border-radius: 0;
+    background: transparent;
+  }
+  .hm-hero-head {
+    display: block;
+    margin: 8px 0;
+  }
+  .hm-hero-title h4 {
+    color: #000;
+  }
+  .hm-hero-title small {
+    display: none;
+  }
+  .hm-hero-when {
+    display: inline;
+    padding: 0;
+    color: var(--primary);
+    font-size: 24px;
+    line-height: 32px;
+    text-align: left;
+  }
+  .hm-hero-when .hm-only-lg {
+    display: inline !important;
+  }
+  .hm .hm-hero-prizes {
+    display: block;
+    margin-bottom: 32px;
+    color: rgb(100, 116, 139);
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .hm-hero-buy {
+    display: block;
+    margin-top: 0;
+  }
+  .hm-hero-buy .hm-pay,
+  .hm-pay {
+    padding: 0 12px;
+    background: var(--hm-blue);
+  }
+  .hm-pay-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .hm-pay-total {
+    display: block;
+  }
+  .hm-pay-total small {
+    display: block;
+    font-size: 12px;
+    font-weight: 200;
+    line-height: 16px;
+  }
+  .hm-pay-total strong {
+    font-weight: 500;
+  }
+  .hm-stepper {
+    justify-content: flex-end;
+    color: #fff;
+  }
+  .hm-step,
+  .hm-hero-buy .hm-step {
+    width: 43px;
+    height: 43px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .hm-qty,
+  .hm-qty-input {
+    min-width: 4rem;
+    color: #fff;
+    font-size: 28px;
+    line-height: 42px;
+  }
+  .hm-qty-input {
+    width: 64px;
+    height: 42px;
+    margin: 0;
+    background: transparent;
+    font-family: inherit;
+    font-weight: 500;
+  }
+  .hm-hero-cta {
+    margin-top: 8px;
+  }
+
+  .hm-draws {
+    padding-top: 0;
+  }
+  .hm-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .hm-cat h2 span {
+    color: var(--hm-text);
+  }
+  .hm-card-body {
+    flex: 1;
+  }
+  .hm-chips {
+    gap: 12px;
+  }
+  .hm-chip,
+  .hm-chip-wrap {
+    width: 100%;
+  }
+  .hm-chip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    border-radius: 8px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+  }
+  .hm-chip span:first-child {
+    width: 100%;
+    margin-right: 4px;
+    white-space: nowrap;
+  }
+  .hm-chip span:last-child {
+    width: 100%;
+    padding: 4px 8px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    text-align: center;
+    white-space: nowrap;
+  }
+  .hm-card-when {
+    align-items: center;
+    justify-content: space-between;
+    color: var(--primary);
+  }
+  .hm-card-when p {
+    display: -webkit-box;
+    overflow: hidden;
+    color: rgb(120, 113, 108);
+    font-size: 12px;
+    line-height: 16px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  .hm-card-when > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 8px;
+  }
+  .hm-card-when span {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .hm-card-when h3 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+  }
+  .hm-card-buy {
+    display: flex;
+    flex-direction: column;
+  }
+  .hm-card-cta {
+    min-height: 44px;
+    padding: 10px 24px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .hm-upsell,
+  .hm-upsell-sentinel {
+    display: none;
+  }
+  .hm-bulk {
+    margin-top: 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+  }
+  .hm-bulk-inner {
+    flex-direction: row;
+    padding: 12px;
+  }
+  .hm-bulk-text {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+  }
+  .hm-bulk-text h3 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 25px;
+  }
+  .hm-bulk-text p {
+    font-size: 12px;
+    line-height: 15px;
+    opacity: 0.75;
+  }
+  .hm-bulk-action {
+    flex-shrink: 0;
+    width: auto;
+    max-width: 14rem;
+    padding-top: 0;
+  }
+  .hm-bulk-btn {
+    height: 36px;
+    padding: 6px 16px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .hm-charity-text {
+    padding: 0 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hm-marquee-track {
+    animation: none;
+  }
+}
+.hm-winner-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #f4f4f4;
+  transition: transform 0.5s;
+}
+@media (hover: hover) {
+  .hm-winner:hover .hm-winner-img {
+    transform: scale(1.05);
+  }
+}

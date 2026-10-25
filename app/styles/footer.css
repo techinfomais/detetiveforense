@@ -1,0 +1,106 @@
+/* Rodapé — medidas de vivasorteoficial.com.br (ver components/sorteviva/footer.tsx) */
+.site-footer {
+  color: rgb(46 50 56);
+  border-radius: 16px 16px 0 0;
+}
+.site-footer > .container {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 0;
+}
+.site-footer hr {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid rgb(46 50 56);
+}
+.site-footer img {
+  display: block;
+  object-fit: contain;
+}
+.site-footer-logo {
+  display: flex;
+  justify-content: center;
+}
+.site-footer-about {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 24px 0;
+}
+.site-footer-social {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.site-footer-social > * {
+  display: flex;
+  align-items: center;
+  height: 24px;
+}
+.site-footer-disclaimer {
+  width: 100%;
+  margin-bottom: 8px;
+  text-align: center;
+  font-size: var(--ds-text-xs);
+  line-height: var(--ds-leading-xs);
+}
+.site-footer-partners {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 48px 0;
+  text-align: center;
+}
+.site-footer-partners span {
+  display: block;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-sm);
+}
+.site-footer-partners img {
+  height: 32px;
+  margin-top: 16px;
+}
+.site-footer-partners .site-footer-dev {
+  object-position: left;
+}
+.site-footer-seal {
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+}
+.site-footer-seal img {
+  height: 37px;
+  margin: 0;
+}
+.site-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 48px 0;
+  font-size: var(--ds-text-xs);
+  line-height: var(--ds-leading-xs);
+}
+@media (min-width: 640px) {
+  .site-footer-logo,
+  .site-footer-partners {
+    justify-content: flex-start;
+  }
+  .site-footer-about {
+    justify-content: space-between;
+  }
+}
+@media (min-width: 1024px) {
+  .site-footer-about {
+    flex-direction: column;
+  }
+  .site-footer-disclaimer,
+  .site-footer-partners {
+    text-align: left;
+  }
+  .site-footer-seal {
+    flex: auto;
+    justify-content: flex-end;
+  }
+}
