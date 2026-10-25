@@ -1,7 +1,18 @@
 "use client"
 
-import { useState, type ChangeEvent, type ReactNode } from "react"
+import { useState, type ChangeEvent, type FormEvent, type ReactNode } from "react"
 import Link from "next/link"
+import {
+  cepError,
+  cpfCnpjError,
+  emailError,
+  maskCep,
+  maskCpfCnpj,
+  maskPhone,
+  nameError,
+  passwordError,
+  phoneError,
+} from "./customer"
 import { LEGAL } from "./terms"
 
 // /seja-um-revendedor e /seja-um-influenciador — mesmo layout e medidas de vivasorteoficial.com.br
@@ -71,51 +82,32 @@ const SOCIAL_NETWORKS = [
   ["OTHER", "Outra"],
 ] as const
 
-// Máscaras iguais às da referência
-const digits = (v: string, max: number) => v.replace(/\D/g, "").slice(0, max)
-
-function maskPhone(v: string) {
-  const d = digits(v, 11)
-  if (!d) return ""
-  if (d.length <= 2) return `(${d}`
-  const rest = d.slice(2)
-  const split = d.length === 11 ? 5 : 4
-  return rest.length > split
-    ? `(${d.slice(0, 2)}) ${rest.slice(0, split)}-${rest.slice(split)}`
-    : `(${d.slice(0, 2)}) ${rest}`
-}
-
-function maskDocument(v: string) {
-  const d = digits(v, 14)
-  if (d.length <= 11) {
-    return d
-      .replace(/(\d{3})(\d)/, "$1.$2")
-      .replace(/(\d{3})(\d)/, "$1.$2")
-      .replace(/(\d{3})(\d{1,2})$/, "$1-$2")
-  }
-  return d
-    .replace(/(\d{2})(\d)/, "$1.$2")
-    .replace(/(\d{3})(\d)/, "$1.$2")
-    .replace(/(\d{3})(\d)/, "$1/$2")
-    .replace(/(\d{4})(\d{1,2})$/, "$1-$2")
-}
-
-function maskCep(v: string) {
-  return digits(v, 8)
-    .replace(/(\d{2})(\d)/, "$1.$2")
-    .replace(/(\d{3})(\d{1,3})$/, "$1-$2")
+// Validação de cada campo pelo `name` (mensagem de erro, ou "" se válido)
+const required = (message: string) => (v: string) => (v.trim() ? "" : message)
+const VALIDATORS: Record<string, (v: string) => string> = {
+  name: nameError,
+  email: emailError,
+  password: passwordError,
+  phone: phoneError,
+  document: cpfCnpjError,
+  network: required("Selecione uma rede social."),
+  profile: required("Informe o seu perfil na rede social."),
+  cep: cepError,
+  address: required("Informe o seu endereço."),
+  number: required("Informe o número."),
 }
 
 type FieldProps = {
   label: string
   required?: boolean
   hint?: string
+  error?: string
   className?: string
   children: ReactNode
   boxClassName?: string
 }
 
-function Field({ label, required, hint, className, children, boxClassName }: FieldProps) {
+function Field({ label, required, hint, error, className, children, boxClassName }: FieldProps) {
   return (
     <div className={`partner-field${className ? ` ${className}` : ""}`}>
       <label className="partner-control">
@@ -123,12 +115,22 @@ function Field({ label, required, hint, className, children, boxClassName }: Fie
           {label}
           {required && <span className="partner-required">*</span>}
         </span>
-        <span className={`partner-box${boxClassName ? ` ${boxClassName}` : ""}`}>{children}</span>
+        <span
+          className={`partner-box${boxClassName ? ` ${boxClassName}` : ""}${error ? " is-invalid" : ""}`}
+        >
+          {children}
+        </span>
       </label>
-      {hint && (
-        <div className="partner-hint">
-          <p>{hint}</p>
-        </div>
+      {error ? (
+        <p className="partner-error" role="alert">
+          {error}
+        </p>
+      ) : (
+        hint && (
+          <div className="partner-hint">
+            <p>{hint}</p>
+          </div>
+        )
       )}
     </div>
   )
@@ -140,10 +142,35 @@ export function PartnerPage({ kind }: { kind: Kind }) {
   const [phone, setPhone] = useState("")
   const [doc, setDoc] = useState("")
   const [cep, setCep] = useState("")
+  const [errors, setErrors] = useState<Record<string, string>>({})
   const masked =
     (set: (v: string) => void, mask: (v: string) => string) => (e: ChangeEvent<HTMLInputElement>) =>
       set(mask(e.target.value))
   const { title, intro } = copy[kind]
+
+  type Control = HTMLInputElement | HTMLSelectElement
+  const check = (el: Control) => {
+    const validate = VALIDATORS[el.name]
+    if (validate) setErrors((e) => ({ ...e, [el.name]: validate(el.value) }))
+  }
+  const invalid = (name: string) => !!errors[name]
+
+  const submit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const form = e.currentTarget
+    const controls = [...form.querySelectorAll<Control>("input[name], select[name]")].filter(
+      (el) => !el.disabled && VALIDATORS[el.name],
+    )
+    const next = Object.fromEntries(controls.map((el) => [el.name, VALIDATORS[el.name](el.value)]))
+    setErrors(next)
+    const first = controls.find((el) => next[el.name])
+    if (first) {
+      first.focus()
+      return
+    }
+    setSent(true)
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
 
   return (
     <div className="partner-bg">
@@ -166,6 +193,7 @@ export function PartnerPage({ kind }: { kind: Kind }) {
                   setPhone("")
                   setDoc("")
                   setCep("")
+                  setErrors({})
                 }}
               >
                 Fazer novo cadastro
@@ -174,10 +202,15 @@ export function PartnerPage({ kind }: { kind: Kind }) {
           ) : (
             <form
               className="partner-form"
-              onSubmit={(e) => {
-                e.preventDefault()
-                setSent(true)
-                window.scrollTo({ top: 0, behavior: "smooth" })
+              noValidate
+              onSubmit={submit}
+              onBlur={(e) => {
+                const el = e.target
+                if (el instanceof HTMLInputElement || el instanceof HTMLSelectElement) check(el)
+              }}
+              onChange={(e) => {
+                const el = e.target
+                if ((el instanceof HTMLInputElement || el instanceof HTMLSelectElement) && errors[el.name]) check(el)
               }}
             >
               <div className="partner-head">
@@ -185,29 +218,32 @@ export function PartnerPage({ kind }: { kind: Kind }) {
                 <p>{intro}</p>
               </div>
 
-              <Field label="Nome completo" required>
+              <Field label="Nome completo" required error={errors.name}>
                 <input
                   className="partner-input"
                   name="name"
+                  aria-invalid={invalid("name")}
                   autoComplete="name"
                   required
                   placeholder="Digite seu nome completo"
                 />
               </Field>
-              <Field label="Endereço de e-mail" required>
+              <Field label="Endereço de e-mail" required error={errors.email}>
                 <input
                   className="partner-input"
                   name="email"
+                  aria-invalid={invalid("email")}
                   type="email"
                   autoComplete="email"
                   required
                   placeholder="Digite seu endereço de e-mail"
                 />
               </Field>
-              <Field label="Crie uma senha" required>
+              <Field label="Crie uma senha" required error={errors.password}>
                 <input
                   className="partner-input"
                   name="password"
+                  aria-invalid={invalid("password")}
                   type={showPassword ? "text" : "password"}
                   autoComplete="new-password"
                   required
@@ -229,31 +265,34 @@ export function PartnerPage({ kind }: { kind: Kind }) {
               <Field
                 label="Celular / WhatsApp"
                 required
+                error={errors.phone}
                 hint="Será enviada uma mensagem por SMS para confirmar o seu número."
               >
                 <input
                   className="partner-input"
                   name="phone"
+                  aria-invalid={invalid("phone")}
                   type="tel"
                   inputMode="numeric"
                   autoComplete="tel-national"
                   required
-                  minLength={14}
+                  maxLength={15}
                   placeholder="Digite seu número de telefone com DDD"
                   value={phone}
                   onChange={masked(setPhone, maskPhone)}
                 />
               </Field>
-              <Field label="CPF ou CNPJ" required>
+              <Field label="CPF ou CNPJ" required error={errors.document}>
                 <input
                   className="partner-input"
                   name="document"
+                  aria-invalid={invalid("document")}
                   inputMode="numeric"
                   required
-                  minLength={14}
+                  maxLength={18}
                   placeholder="Digite seu CPF ou CNPJ"
                   value={doc}
-                  onChange={masked(setDoc, maskDocument)}
+                  onChange={masked(setDoc, maskCpfCnpj)}
                 />
               </Field>
 
@@ -262,9 +301,16 @@ export function PartnerPage({ kind }: { kind: Kind }) {
                   <Field
                     label="Rede social"
                     required
+                    error={errors.network}
                     hint="Selecione a rede social que você mais utiliza"
                   >
-                    <select className="partner-input partner-select" name="network" required defaultValue="">
+                    <select
+                      className="partner-input partner-select"
+                      name="network"
+                      aria-invalid={invalid("network")}
+                      required
+                      defaultValue=""
+                    >
                       <option value="">Selecione uma opção</option>
                       {SOCIAL_NETWORKS.map(([value, name]) => (
                         <option key={value} value={value}>
@@ -276,11 +322,13 @@ export function PartnerPage({ kind }: { kind: Kind }) {
                   <Field
                     label="Perfil"
                     required
+                    error={errors.profile}
                     hint="Informe o seu perfil na rede social selecionada"
                   >
                     <input
                       className="partner-input partner-input-lg"
                       name="profile"
+                      aria-invalid={invalid("profile")}
                       required
                       placeholder="Seu perfil"
                     />
@@ -288,32 +336,35 @@ export function PartnerPage({ kind }: { kind: Kind }) {
                 </div>
               )}
 
-              <Field label="CEP" required>
+              <Field label="CEP" required error={errors.cep}>
                 <input
                   className="partner-input"
                   name="cep"
+                  aria-invalid={invalid("cep")}
                   inputMode="numeric"
                   autoComplete="postal-code"
                   required
-                  minLength={10}
+                  maxLength={10}
                   placeholder="Digite o CEP do seu endereço"
                   value={cep}
                   onChange={masked(setCep, maskCep)}
                 />
               </Field>
-              <Field label="Endereço" required>
+              <Field label="Endereço" required error={errors.address}>
                 <input
                   className="partner-input"
                   name="address"
+                  aria-invalid={invalid("address")}
                   autoComplete="address-line1"
                   required
                   placeholder="Digite o seu endereço"
                 />
               </Field>
-              <Field label="Número" required>
+              <Field label="Número" required error={errors.number}>
                 <input
                   className="partner-input"
                   name="number"
+                  aria-invalid={invalid("number")}
                   required
                   placeholder="Digite o número da sua casa"
                 />

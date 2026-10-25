@@ -26,6 +26,10 @@
 .identify-field {
   margin: 24px 0;
 }
+/* "Seus dados": vários campos empilhados — espaço para o rótulo que sobe ao focar */
+.ck-profile .identify-field + .identify-field {
+  margin-top: 40px;
+}
 
 /* Input com rótulo flutuante: dentro do campo em repouso; sobe ao focar/preencher */
 .identify-input {

@@ -206,3 +206,15 @@
 .partner-eye:active {
   transform: translateY(0);
 }
+
+/* Validação: borda e mensagem de erro do campo */
+.partner-box.is-invalid,
+.partner-box.is-invalid:focus-within {
+  border-color: rgb(220, 38, 38);
+}
+.partner-error {
+  margin-top: 8px;
+  color: rgb(220, 38, 38);
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-sm);
+}

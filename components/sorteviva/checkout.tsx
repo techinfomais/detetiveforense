@@ -6,19 +6,29 @@ import { useEffect, useRef, useState } from "react"
 import { ArrowLeft, CreditCard, Minus, Plus, ShoppingCart, Trash2 } from "lucide-react"
 import { IdentifyForm, onlyDigits } from "./checkout-identify"
 import { PaymentPanel, type PayMethod } from "./checkout-payment"
+import { ProfileForm } from "./checkout-profile"
+import {
+  customerForCpf,
+  loadCustomer,
+  purchaseMessage,
+  sameCpf,
+  saveCustomer,
+  type Customer,
+} from "./customer"
 import { draws } from "./home"
 import { LEGAL } from "./terms"
 
 // /checkout — replica o checkout da referência:
-// 1. Identificação (CPF) → 2. Carrinho (revisão, quantidades, forma de pagamento) → pagamento
+// 1. Identificação (CPF → seus dados) → 2. Carrinho (revisão, quantidades, forma de pagamento) → pagamento
 // demonstrativo (Pix/cartão simulados no navegador) → concluído.
 
 export type Cart = Record<string, number>
 type Draw = (typeof draws)[number]
-type Stage = "identify" | "cart" | "payment" | "done"
+type Stage = "identify" | "profile" | "cart" | "payment" | "done"
 
-const PURCHASE_MESSAGE = "Fiz a compra e aguardo o resultado!"
-const PURCHASE_WHATSAPP_URL = `https://wa.me/${LEGAL.whatsapp}?text=${encodeURIComponent(PURCHASE_MESSAGE)}`
+// a mensagem leva o CPF digitado para o bot identificar o cliente no WhatsApp
+const purchaseWhatsAppUrl = (cpf: string) =>
+  `https://wa.me/${LEGAL.whatsapp}?text=${encodeURIComponent(purchaseMessage(cpf))}`
 
 type Order = {
   id: string
@@ -60,7 +70,7 @@ function Stepper({
   onBack: () => void
 }) {
   const steps = ["Identificação", stage === "payment" ? "Pagamento" : "Carrinho"]
-  const active = stage === "identify" ? 0 : 1
+  const active = stage === "identify" || stage === "profile" ? 0 : 1
   return (
     <div className="ck-steps-wrap">
       <ol className="ck-steps" aria-label="Etapas do checkout">
@@ -176,9 +186,30 @@ export function CheckoutPage({
 }) {
   const [stage, setStage] = useState<Stage>("identify")
   const [cpf, setCpf] = useState("")
+  const [customer, setCustomer] = useState<Customer | null>(null)
+  // cliente salvo em visita anterior: só pré-preenche o CPF; o cliente confirma (ou corrige) e continua
+  const [restored, setRestored] = useState(false)
   const [method, setMethod] = useState<PayMethod>("pix")
   const [order, setOrder] = useState<Order | null>(null)
+  const [whatsAppUrl, setWhatsAppUrl] = useState("")
   const top = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const saved = loadCustomer()
+    const timer = setTimeout(() => {
+      if (saved) setCpf(saved.cpf)
+      setRestored(true)
+    }, 0)
+    return () => clearTimeout(timer)
+  }, [])
+
+  // sem cliente válido não há carrinho/pagamento: volta para a identificação
+  useEffect(() => {
+    if ((stage === "cart" || stage === "payment") && !customer) {
+      const timer = setTimeout(() => setStage("identify"), 0)
+      return () => clearTimeout(timer)
+    }
+  }, [stage, customer])
 
   // ao trocar de etapa, volta ao topo da etapa e move o foco para o título
   useEffect(() => {
@@ -202,10 +233,20 @@ export function CheckoutPage({
     setStage("payment")
   }
   const paid = () => {
+    // revalida o cliente salvo: o CPF da mensagem é sempre o CPF atual e válido
+    const saved = loadCustomer()
+    const buyer = saved && sameCpf(saved.cpf, cpf) ? saved : null
+    if (!buyer) {
+      setCustomer(null)
+      setStage("identify")
+      return
+    }
+    const url = purchaseWhatsAppUrl(buyer.cpf)
+    setWhatsAppUrl(url)
     setCart({})
     setStage("done")
     // toda compra concluída segue para o atendimento no WhatsApp
-    window.location.assign(PURCHASE_WHATSAPP_URL)
+    window.location.assign(url)
   }
 
   return (
@@ -215,12 +256,28 @@ export function CheckoutPage({
           <Stepper stage={stage} onBack={() => setStage("identify")} />
         )}
 
-        {stage === "identify" && (
+        {stage === "identify" && restored && (
           <IdentifyForm
             id="checkout-cpf"
             initialCpf={cpf}
             onIdentified={(value) => {
+              // mesmo CPF já cadastrado → segue; CPF diferente → os dados anteriores são descartados
+              const existing = customerForCpf(value)
               setCpf(value)
+              setCustomer(existing)
+              setStage(existing ? "cart" : "profile")
+            }}
+          />
+        )}
+
+        {stage === "profile" && (
+          <ProfileForm
+            id="checkout-profile"
+            initial={customer && sameCpf(customer.cpf, cpf) ? customer : undefined}
+            onSubmit={(values) => {
+              const saved = saveCustomer({ cpf, ...values })
+              if (!saved) return
+              setCustomer(saved)
               setStage("cart")
             }}
           />
@@ -237,10 +294,14 @@ export function CheckoutPage({
               </p>
               <div className="ck-identified">
                 <span>
-                  Identificado pelo CPF <b>{hideCpf(cpf)}</b>
+                  {customer ? `${customer.name.split(" ")[0]}, i` : "I"}dentificado pelo CPF{" "}
+                  <b>{hideCpf(cpf)}</b>
                 </span>
                 <button type="button" className="ck-link" onClick={() => setStage("identify")}>
-                  Alterar
+                  Alterar CPF
+                </button>
+                <button type="button" className="ck-link" onClick={() => setStage("profile")}>
+                  Editar dados
                 </button>
               </div>
             </div>
@@ -383,7 +444,7 @@ export function CheckoutPage({
               <h3>Pedido nº {order.id}</h3>
               <OrderList order={order} />
             </div>
-            <a href={PURCHASE_WHATSAPP_URL} className="ck-btn">
+            <a href={whatsAppUrl} className="ck-btn">
               <span>Abrir o WhatsApp</span>
             </a>
             <Link href="/" className="ck-link">
