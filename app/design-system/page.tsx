@@ -11,7 +11,7 @@ import {
 } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Design System - Sorte Viva",
+  title: "Design System - Viva Sorte",
   description: "Conferência visual dos tokens do DESIGNSYSTEM.md em Tailwind.",
 }
 

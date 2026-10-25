@@ -148,7 +148,7 @@ const BANNER = {
   day: "/banners/home-banner-gabigol.webp",
 }
 
-// Sorte Viva: todo domingo; até 02/08 também havia o "Cliente Fiel Premiado".
+// Viva Sorte: todo domingo; até 02/08 também havia o "Cliente Fiel Premiado".
 function sorteViva(): Draw[] {
   const sundays = backwards(utc(2026, 10, 25), 30, () => [0])
   const out: Draw[] = []
@@ -156,7 +156,7 @@ function sorteViva(): Draw[] {
     const f = fmt(t)
     out.push({
       id: f.ymd,
-      title: `Sorte Viva - ${f.day}`,
+      title: `Viva Sorte - ${f.day}`,
       ...f,
       edition: pad(52 - i, 3),
       banner: BANNER.big,
@@ -217,14 +217,14 @@ function horaDaSorte(): Draw[] {
   return out.slice(0, 30)
 }
 
-// Sorte Viva do Dia: às quintas desde agosto; antes, segunda/quarta/sexta.
+// Viva Sorte do Dia: às quintas desde agosto; antes, segunda/quarta/sexta.
 function sorteVivaDoDia(): Draw[] {
   const days = backwards(utc(2026, 10, 22), 30, (t) => (t >= utc(2026, 8, 6) ? [4] : [1, 3, 5]))
   return days.map((t, i) => {
     const f = fmt(t)
     return {
       id: f.ymd,
-      title: `Sorte Viva do Dia - ${f.day}`,
+      title: `Viva Sorte do Dia - ${f.day}`,
       ...f,
       edition: String(190 - i),
       banner: BANNER.day,
@@ -268,14 +268,14 @@ function regional(region: Exclude<Region, "BR" | "PR">, label: string, time: str
   })
 }
 
-// Sorte Viva Paraná: domingos, últimas 4 edições (até 17/05/2026).
+// Viva Sorte Paraná: domingos, últimas 4 edições (até 17/05/2026).
 function sorteVivaParana(): Draw[] {
   const days = backwards(utc(2026, 5, 17), 4, () => [0])
   return days.map((t, i) => {
     const f = fmt(t)
     return {
       id: f.ymd,
-      title: `Sorte Viva Paraná - ${f.day}`,
+      title: `Viva Sorte Paraná - ${f.day}`,
       ...f,
       edition: pad(4 - i, 3),
       banner: BANNER.big,
@@ -297,15 +297,15 @@ const regionText = (r: string) => `Muito dinheiro somente para a região ${r} do
 
 // Mesma ordem e mesmos slugs da referência.
 export const RESULT_CATEGORIES: ResultCategory[] = [
-  { slug: "viva-sorte", name: "Sorte Viva", text: "Sorteios Filantropia Premiável", icon: "hora-sorte-logo-icon", draws: sorteViva() },
+  { slug: "viva-sorte", name: "Viva Sorte", text: "Sorteios Filantropia Premiável", icon: "hora-sorte-logo-icon", draws: sorteViva() },
   { slug: "hora-do-viva", name: "Hora da Sorte", text: "Sorteios Filantropia Premiável", icon: "hora-sorte-relogio-icon", draws: horaDaSorte() },
-  { slug: "vivasortedodia", name: "Sorte Viva do Dia", text: "Multiplique o valor pago em até 100.000x", icon: "hora-sorte-calendario-icon", draws: sorteVivaDoDia() },
+  { slug: "vivasortedodia", name: "Viva Sorte do Dia", text: "Multiplique o valor pago em até 100.000x", icon: "hora-sorte-calendario-icon", draws: sorteVivaDoDia() },
   { slug: "hora-norte", name: "Hora Norte", text: regionText("Norte"), icon: "hora-sorte-norte-icon", draws: regional("N", "Norte", "21:00") },
   { slug: "hora-centro-oeste", name: "Hora Centro-Oeste", text: regionText("Centro-Oeste"), icon: "hora-sorte-centrooeste-icon", draws: regional("CO", "Centro-Oeste", "20:30") },
   { slug: "hora-sudeste", name: "Hora Sudeste", text: regionText("Sudeste"), icon: "hora-sorte-sudeste-icon", draws: regional("SE", "Sudeste", "20:00") },
   { slug: "hora-sul", name: "Hora Sul", text: regionText("Sul"), icon: "hora-sorte-sul-icon", draws: regional("S", "Sul", "19:00") },
   { slug: "hora-nordeste", name: "Hora Nordeste", text: regionText("Nordeste"), icon: "hora-sorte-nordeste-icon", draws: regional("NE", "Nordeste", "18:30") },
-  { slug: "vivapr", name: "Sorte Viva Paraná", text: "O título de capitalização somente para o interior do Paraná.", icon: "hora-sorte-parana-icon", draws: sorteVivaParana() },
+  { slug: "vivapr", name: "Viva Sorte Paraná", text: "O título de capitalização somente para o interior do Paraná.", icon: "hora-sorte-parana-icon", draws: sorteVivaParana() },
 ]
 
 /** Todas as rotas estáticas de /resultados (lista para generateStaticParams). */

@@ -49,7 +49,7 @@ export function HelpCenter() {
     <div className="help container">
       <div className="help-head">
         <h1>Como podemos ajudar?</h1>
-        <p>O time Sorte Viva está pronto para ouvir você.</p>
+        <p>O time Viva Sorte está pronto para ouvir você.</p>
       </div>
       <section className="help-channels">
         {channels.map((c) => (

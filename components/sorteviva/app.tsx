@@ -203,7 +203,7 @@ export function SorteApp({ page }: { page: string }) {
         <Link href="/" className="header-logo" aria-label="Página inicial">
           <Image
             src="/logos/principal-logo.webp"
-            alt="Sorte Viva"
+            alt="Viva Sorte"
             width={144}
             height={48}
             priority

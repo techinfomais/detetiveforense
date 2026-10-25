@@ -37,7 +37,7 @@ export function DeTodosPage({
             <div className="detodos-hero-logo">
               <Image
                 src="/logos/principal-logo.webp"
-                alt="Sorte Viva"
+                alt="Viva Sorte"
                 width={257}
                 height={32}
                 unoptimized

@@ -239,7 +239,7 @@ function PrintSheet({ draw, prizes }: { draw: Draw; prizes: Prize[] }) {
   return (
     <div className="rcat-print" aria-hidden="true">
       <header>
-        <img src="/logos/principal-logo.webp" alt="Sorte Viva" width={100} height={13} />
+        <img src="/logos/principal-logo.webp" alt="Viva Sorte" width={100} height={13} />
         <div>
           <p className="rcat-print-title">{draw.title}</p>
           <p className="rcat-print-sub">Resultados</p>

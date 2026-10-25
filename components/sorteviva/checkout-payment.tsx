@@ -91,7 +91,7 @@ function PixPanel({
   // código "copia e cola" fictício (não é um BR Code válido)
   const code = `00020126DEMONSTRACAO0014SORTEVIVA.PIX52040000530398654${String(
     Math.round(total * 100)
-  ).padStart(6, "0")}5802BR5910SORTE VIVA62${orderId}6304DEMO`
+  ).padStart(6, "0")}5802BR5910VIVA SORTE62${orderId}6304DEMO`
   const expired = left === 0
   const copy = async () => {
     try {

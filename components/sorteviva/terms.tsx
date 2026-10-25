@@ -1,31 +1,36 @@
 import Link from "next/link"
 import type { ReactNode } from "react"
 
-// Dados societários FICTÍCIOS — substituir pelos oficiais antes do lançamento.
+// Dados societários e de contato oficiais (vivasorteoficial.com.br)
 export const LEGAL = {
-  company: "SORTE VIVA INTERMEDIAÇÃO DIGITAL LTDA.",
-  companyCnpj: "12.345.678/0001-90",
+  company: "VIVA SORTE DISTRIBUIDORA E INTERMEDIADORA DE NEGOCIOS LTDA",
+  companyCnpj: "48.098.937/0001-78",
   companyAddress:
-    "Rua das Palmeiras, 100, sala 1, Centro, na cidade de São Paulo, Estado de São Paulo, CEP 01000-000",
-  issuer: "CAPITALIZADORA EXEMPLO S/A",
-  issuerShort: "Exemplo Capitalização",
-  issuerCnpj: "98.765.432/0001-10",
-  issuerAddress: "Av. Exemplo, 200, conjunto 10, Centro, CEP 20000-000, Rio de Janeiro/RJ",
-  charity: "INSTITUIÇÃO BENEFICENTE PARCEIRA",
-  charityCnpj: "11.222.333/0001-44",
-  phone: "0800 000 0000",
-  supportPhone: "(11) 4000-0000",
-  sacPhone: "(11) 4000-0001",
-  ombudsmanPhone: "0800 000 0001",
-  // Perfis oficiais: preencher com as URLs reais (vazio = ícone sem link)
-  social: { instagram: "", facebook: "", x: "", youtube: "" },
-  whatsapp: "5511900000000",
-  email: "contato@exemplo.com.br",
+    "Avenida Maringá, 1765, mezanino 1, na cidade de Londrina, Estado do Paraná, CEP 86060-000",
+  issuer: "VIA CAPITALIZAÇÃO S/A",
+  issuerShort: "Via Capitalização",
+  issuerCnpj: "88.076.302/0001-94",
+  issuerAddress: "Av. Carlos Gomes, 222, conjunto 901, Boa Vista, CEP 90480-000, Porto Alegre/RS",
+  charity: "FEDERAÇÃO NACIONAL DAS APAES - FENAPAES",
+  charityCnpj: "62.388.566/0001-90",
+  phone: "0800 701 5179",
+  supportPhone: "(43) 3142-2680",
+  sacPhone: "(51) 3303-3851",
+  ombudsmanPhone: "0800 874 1505",
+  social: {
+    instagram: "https://www.instagram.com/vivasorte",
+    facebook: "https://www.facebook.com/vivasorteof",
+    x: "https://x.com/viva_sorte",
+    youtube: "https://www.youtube.com/@vivasorteof",
+  },
+  // WhatsApp provisório para atendimento e confirmação de compras
+  whatsapp: "5511950494335",
+  email: "contato@vivasorteoficial.com.br",
   updatedAt: "Outubro/2026",
 }
 
 const { company, companyCnpj, issuer, issuerCnpj, charity, charityCnpj } = LEGAL
-const BRAND = "SORTE VIVA"
+const BRAND = "VIVA SORTE"
 
 const sections: { title: string; body: ReactNode }[] = [
   {

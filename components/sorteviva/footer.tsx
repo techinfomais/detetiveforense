@@ -28,7 +28,7 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="container">
         <div className="site-footer-logo">
-          <Image src="/logos/principal-logo.webp" alt="Sorte Viva" width={180} height={23} unoptimized />
+          <Image src="/logos/principal-logo.webp" alt="Viva Sorte" width={180} height={23} unoptimized />
         </div>
         <div className="site-footer-about">
           <div className="site-footer-social">
@@ -52,13 +52,13 @@ export function SiteFooter() {
             })}
           </div>
           <p className="site-footer-disclaimer">
-            Os sorteios da Sorte Viva são títulos de capitalização da modalidade filantropia premiável, de
+            Os sorteios da Viva Sorte são títulos de capitalização da modalidade filantropia premiável, de
             pagamento único, emitidos pela {LEGAL.issuer}, CNPJ nº {LEGAL.issuerCnpj}. O subscritor pode ceder
             voluntariamente 100% do direito de resgate à {LEGAL.charity}, CNPJ nº {LEGAL.charityCnpj}. Leia as
             Condições Gerais antes de contratar: a compra implica adesão automática a elas, e o subscritor declara
             conhecê-las. A aprovação do plano pela Susep não representa incentivo ou recomendação de compra por
             parte da Autarquia, apenas sua conformidade com as normas em vigor. É proibida a venda de títulos de
-            capitalização a menores de 16 (dezesseis) anos (art. 3º do Código Civil); os títulos da Sorte Viva
+            capitalização a menores de 16 (dezesseis) anos (art. 3º do Código Civil); os títulos da Viva Sorte
             são destinados exclusivamente a maiores de 16 anos. A distribuição é feita pela {LEGAL.company},
             que atua somente como intermediadora entre o subscritor e a sociedade de capitalização.
           </p>

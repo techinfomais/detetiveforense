@@ -7,6 +7,7 @@ import { ArrowLeft, CreditCard, Minus, Plus, ShoppingCart, Trash2 } from "lucide
 import { IdentifyForm, onlyDigits } from "./checkout-identify"
 import { PaymentPanel, type PayMethod } from "./checkout-payment"
 import { draws } from "./home"
+import { LEGAL } from "./terms"
 
 // /checkout — replica o checkout da referência:
 // 1. Identificação (CPF) → 2. Carrinho (revisão, quantidades, forma de pagamento) → pagamento
@@ -15,6 +16,10 @@ import { draws } from "./home"
 export type Cart = Record<string, number>
 type Draw = (typeof draws)[number]
 type Stage = "identify" | "cart" | "payment" | "done"
+
+const PURCHASE_MESSAGE = "Fiz a compra e aguardo o resultado!"
+const PURCHASE_WHATSAPP_URL = `https://wa.me/${LEGAL.whatsapp}?text=${encodeURIComponent(PURCHASE_MESSAGE)}`
+
 type Order = {
   id: string
   items: { draw: Draw; qty: number }[]
@@ -199,6 +204,8 @@ export function CheckoutPage({
   const paid = () => {
     setCart({})
     setStage("done")
+    // toda compra concluída segue para o atendimento no WhatsApp
+    window.location.assign(PURCHASE_WHATSAPP_URL)
   }
 
   return (
@@ -376,8 +383,11 @@ export function CheckoutPage({
               <h3>Pedido nº {order.id}</h3>
               <OrderList order={order} />
             </div>
-            <Link href="/" className="ck-btn">
-              <span>Voltar ao início</span>
+            <a href={PURCHASE_WHATSAPP_URL} className="ck-btn">
+              <span>Abrir o WhatsApp</span>
+            </a>
+            <Link href="/" className="ck-link">
+              Voltar ao início
             </Link>
           </div>
         )}

@@ -92,8 +92,8 @@ type HomeDraw = DrawBase &
 const HERO: HomeDraw = {
   id: 1,
   kind: "hero",
-  name: "Sorte Viva de Domingo",
-  title: "Sorte Viva",
+  name: "Viva Sorte de Domingo",
+  title: "Viva Sorte",
   price: 0.99,
   qty: 20,
   step: 10,
@@ -109,7 +109,7 @@ const HORA: HomeDraw[] = [
   { id: 6, kind: "hora", days: 6, time: "19:30", name: "Hora do Viva 19:30", title: "Hora do Viva", price: 0.1, qty: 25, step: 25, edition: "3190", susep: "15414.900884/2026-77", banner: "/banners/home-banner-10-mil-1.webp" },
 ]
 const DIA: HomeDraw[] = [
-  { id: 7, kind: "dia", days: 4, time: "20:30", name: "Sorte Viva do Dia", title: "Sorte Viva do Dia", price: 0.05, qty: 100, step: 100, edition: "191", susep: "15414.900752/2026-22", banner: "/banners/home-banner-gabigol.webp" },
+  { id: 7, kind: "dia", days: 4, time: "20:30", name: "Viva Sorte do Dia", title: "Viva Sorte do Dia", price: 0.05, qty: 100, step: 100, edition: "191", susep: "15414.900752/2026-22", banner: "/banners/home-banner-gabigol.webp" },
 ]
 export const draws: HomeDraw[] = [HERO, ...HORA, ...DIA]
 
@@ -281,7 +281,7 @@ function Hero({ now, add }: { now: number; add: Add }) {
         <div className="hm-hero-banner">
           <img
             src={HERO.banner}
-            alt="Sorte Viva: mais de 1 milhão em prêmios por R$ 0,99"
+            alt="Viva Sorte: mais de 1 milhão em prêmios por R$ 0,99"
             width={923}
             height={519}
           />
@@ -651,7 +651,7 @@ export function Home({ add, addMany }: { add: Add; addMany: (items: [number, num
             <Category
               tone="dia"
               icon="/icons/hora-sorte-calendario-icon.webp"
-              title="Sorte Viva do Dia"
+              title="Viva Sorte do Dia"
               sub="Multiplique o valor pago em até 100.000x"
             />
             {DIA.map((d) => (
@@ -670,7 +670,7 @@ export function Home({ add, addMany }: { add: Add; addMany: (items: [number, num
             <h5>{LEGAL.charity}</h5>
             <div className="hm-charity-text">
               <p>
-                A {LEGAL.charity.toLowerCase().replace(/(^|\s)\S/g, (c) => c.toUpperCase())} é uma rede nacional
+                A Federação Nacional das Apaes, ou Apae Brasil, é uma rede nacional
                 dedicada à defesa e à garantia de direitos das pessoas com deficiência intelectual e
                 múltipla, com apoio às famílias em todo o país.
               </p>

@@ -37,24 +37,24 @@ function Icon({ name, className }: { name: keyof typeof icons; className: string
 
 const copy: Record<Kind, { title: string; intro: ReactNode }> = {
   revendedor: {
-    title: "Seja um revendedor Sorte Viva",
+    title: "Seja um revendedor Viva Sorte",
     intro: (
       <>
         Que tal ganhar uma renda extra?
         <br />
-        Revenda Sorte Viva sem sair de casa e aproveite essa oportunidade!
+        Revenda Viva Sorte sem sair de casa e aproveite essa oportunidade!
         <br />
         Preencha o formulário abaixo e torne-se um revendedor!
       </>
     ),
   },
   influenciador: {
-    title: "Seja um influenciador Sorte Viva",
+    title: "Seja um influenciador Viva Sorte",
     intro: (
       <>
         Que tal transformar seu público em renda?
         <br />
-        Divulgue Sorte Viva nas suas redes e aproveite essa oportunidade!
+        Divulgue Viva Sorte nas suas redes e aproveite essa oportunidade!
         <br />
         Preencha o formulário abaixo e torne-se um influenciador!
       </>

@@ -9,7 +9,7 @@ const ubuntu = Ubuntu({
 })
 
 export const metadata: Metadata = {
-  title: "Sorte Viva - Mude de vida agora!",
+  title: "Viva Sorte - Mude de vida agora!",
   description:
     "Explore sorteios e confira resultados. Plataforma demonstrativa.",
 }
